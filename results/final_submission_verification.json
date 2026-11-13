@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "status": "passed",
-  "verified_utc": "2026-11-13T19:08:55.899794+00:00",
+  "verified_utc": "2026-11-13T21:00:39.454409+00:00",
   "notebook": "casework/case_notebook.ipynb",
-  "notebook_sha256_lf": "650656109e12c2090506baa76a39977e9b18335de86df8e7abfa7386c2c887fb",
+  "notebook_sha256_lf": "08012e5f51552ae105cf4dab6f43219fdb2aaab236cb0fe7a14d0e882c6eb9ca",
   "notebook_format": "4.5",
   "cells": 73,
   "code_cells": 42,
@@ -14,20 +14,22 @@
     "code_cells": 42,
     "notebook_errors": 0,
     "environment": "Existing core-only .venv; fresh kernel in relocated project; empty recurrence cache",
-    "directory": "C:\\Study\\2026-27\\P2_AI\\phenology_w2\\tmp\\final_submission_review\\relocated_project"
+    "directory": "C:\\Study\\2026-27\\P2_AI\\phenology_w2\\tmp\\final_submission_review\\relocated_project",
+    "scope": "Earlier full fresh-kernel execution; all 42 complete code-cell objects are identical after this Markdown revision. No new full execution or model fitting was performed for this revision."
   },
   "preservation": {
     "original_cells": 65,
     "original_code_cells": 38,
-    "original_sources_outputs_execution_counts_metadata_unchanged": true,
-    "only_original_cell_change": "Added deterministic IDs to 60 cells to normalize notebook format; existing IDs preserved.",
     "original_reference_notebook_unchanged": true,
     "historical_result_files_unchanged": true,
     "reproduced_arrays_exactly": [
       "pixel_dataset.npz",
       "predictions.npz",
       "extension_predictions.npz"
-    ]
+    ],
+    "original_code_sources_outputs_execution_counts_metadata_unchanged": true,
+    "cell_id_normalization": "Earlier integration added deterministic IDs to 60 original cells; existing IDs preserved.",
+    "markdown_revision": "Added a prominent final results/RGB scaling overview, scoped earlier conclusions, linked final experiment sections and removed a stray 'So'."
   },
   "new_experiments": {
     "spatial_features": "Seven synthetic checks passed; independent spatial footprint and metric verification passed.",
@@ -47,15 +49,30 @@
   ],
   "packaged_validation": {
     "status": "passed",
-    "files": 120,
+    "files": 121,
     "archive": "dist/phenology_submission.zip",
     "archive_integrity": "Every member byte-compared with its source by checks/build_submission.py; no corrupt members.",
     "unpacked_checks": [
+      "checks/check_dataset_encoding.py",
       "checks/check_spatial_results.py",
       "checks/check_temporal_context.py"
     ],
     "local_fitted_models_present": false,
     "optional_pytorch_required": false,
-    "notebook_schema_and_saved_outputs": "Valid nbformat4.5, all42 sequential executed code cells, no saved errors, matching notebook checksum."
+    "notebook_schema_and_saved_outputs": "Valid nbformat4.5, all42 sequential executed code cells, no saved errors, matching notebook checksum.",
+    "verified_utc": "2026-11-13T21:01:19.383274+00:00"
+  },
+  "narrative_revision": {
+    "prior_commit": "543a8ef7b19b2053740c4df38ff1e055459012d3",
+    "prior_notebook_sha256_lf": "650656109e12c2090506baa76a39977e9b18335de86df8e7abfa7386c2c887fb",
+    "all_42_complete_code_cell_objects_identical": true,
+    "original_38_code_cell_sources_outputs_counts_metadata_identical": true,
+    "model_sources_protocols_data_predictions_and_metrics_unchanged": true,
+    "notebook_validation": "nbformat 4.5 valid; unique cell IDs; execution counts 1-42; no saved errors"
+  },
+  "portability_revision": {
+    "change": "The spatial and temporal result checks accept different ZIP compression, order or timestamps only for pixel_dataset.npz when exact uncompressed NPY member bytes match the prior frozen content digest and both records identify the same original dataset. All other hash checks remain strict.",
+    "focused_check": "checks/check_dataset_encoding.py",
+    "negative_cases": "One feature-byte mutation with labels/IDs unchanged and a broken selection-record checksum are both rejected by both verifiers."
   }
 }

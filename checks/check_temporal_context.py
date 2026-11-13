@@ -19,7 +19,7 @@ if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from checks.check_spatial_results import (
     SPECIES, check_oracles, checked_path, equal, independent_metrics,
-    read_json, reconstruct_geometry, region_scores, require,
+    read_json, reconstruct_geometry, region_scores, require, verify_dataset_reencoding,
 )
 
 
@@ -54,7 +54,12 @@ def check_hashes(root, recorded, expected_paths):
             "Temporal hash manifest has missing or unexpected paths.")
     for relative, expected in recorded.items():
         path = checked_path(root, relative)
-        require(path.is_file() and sha256(path) == expected, f"Temporal source/input changed: {relative}")
+        require(path.is_file(), f"Temporal source/input changed: {relative}")
+        if sha256(path) != expected:
+            if relative == "results/pixel_dataset.npz":
+                verify_dataset_reencoding(root, path, expected)
+            else:
+                raise AssertionError(f"Temporal source/input changed: {relative}")
 
 
 def check_epoch_summary(scored, ids):

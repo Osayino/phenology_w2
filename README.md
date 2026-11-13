@@ -108,7 +108,7 @@ run and scores documented above are the historical 11 November baseline run.
 
 ## Broader optional model comparison
 
-The notebook's final comparison covers six additional approaches: SVM, a
+The earlier model-family comparison covers six additional approaches: SVM, a
 multinomial logistic GLM, XGBoost, Bayesian classification (Gaussian naive Bayes
 and a tree-augmented Bayesian network), pretrained CNN transfer features, and
 pretrained vision-transformer transfer features. It includes the two original
@@ -140,8 +140,8 @@ command is `python -B experiments/run_comparison.py --fit`. Budget roughly one
 additional CPU hour, depending on the computer, and additional disk space for
 the larger environment and feature caches. Pretrained weights need internet
 access on their first download. The runner saves new comparison files separately
-from the original K-NN and random-forest results. Reopen or rerun the final
-notebook cells to display newly generated comparison results.
+from the original K-NN and random-forest results. Reopen or rerun the
+model-family comparison cells to display newly generated comparison results.
 
 The durable comparison files are `results/model_comparison.json`,
 `model_comparison_predictions.npz`, `model_comparison_selection.json`,
@@ -150,12 +150,16 @@ models and embedding caches under `experiments/artifacts/` can be regenerated
 with `--fit`; they are not needed to inspect or verify the saved results.
 
 In the fixed 13 November comparison, multinomial logistic regression on original
-RGB intensities had the highest observed test accuracy: **36.39%**, compared with
+RGB intensities had the highest test accuracy in that comparison: **36.39%**, compared with
 the random forest's **34.12%** (+2.27 percentage points). Its balanced accuracy was
 **38.91%** and macro F1 **0.3146**. The notebook reports every model, including the
 weaker outcomes; its 100% validation accuracy did not carry over to new regions.
 
 ## Final spatial and temporal experiments
+
+The notebook opens with a summary of these latest results and links to their
+full sections. It also shows where RGB values are divided by 255 and explains
+how that differs from RGBcc and recurrence-image scaling.
 
 I tested whether neighboring colors help predictions in different image regions.
 The spatial comparison keeps the same balanced logistic GLM and adds local RGB

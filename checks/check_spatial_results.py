@@ -15,12 +15,17 @@ from datetime import datetime
 import hashlib
 import json
 from pathlib import Path
+import sys
 
 import numpy as np
 from PIL import Image
 from scipy.ndimage import distance_transform_cdt, maximum_filter
 from sklearn.metrics import accuracy_score, confusion_matrix, f1_score, recall_score
 from sklearn.model_selection import train_test_split
+
+if __package__ in (None, ""):
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from experiments.verify_comparison import dataset_content_sha256
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -88,7 +93,39 @@ def check_hashes(root, recorded, expected_paths=None):
     for relative, expected in recorded.items():
         require(isinstance(expected, str) and len(expected) == 64, f"Invalid checksum: {relative}")
         path = checked_path(root, relative)
-        require(path.is_file() and sha256(path) == expected, f"File changed or missing: {relative}")
+        require(path.is_file(), f"File changed or missing: {relative}")
+        if sha256(path) != expected:
+            if relative == "results/pixel_dataset.npz":
+                verify_dataset_reencoding(root, path, expected)
+            else:
+                raise AssertionError(f"File changed or missing: {relative}")
+
+
+def verify_dataset_reencoding(root, path, expected_file_sha256):
+    """Accept different ZIP encoding only with matching frozen NPY payloads.
+
+    The pre-existing comparison records must name the same original dataset
+    bytes as this experiment. Its frozen selection record is checked before
+    using the content digest shared by both records. No array value, NPY header
+    or archive member can change under this fallback.
+    """
+    root, path = Path(root).resolve(), Path(path).resolve()
+    require(path == (root / "results/pixel_dataset.npz").resolve(),
+            "The encoding fallback is limited to the saved pixel dataset.")
+    comparison = read_json(root / "results/model_comparison.json")
+    selection_path = root / "results/model_comparison_selection.json"
+    frozen = read_json(selection_path)
+    require(comparison["dataset_sha256"] == frozen["dataset_sha256"] == expected_file_sha256,
+            "Frozen records do not refer to the same original dataset bytes.")
+    # This older selection record deliberately uses a raw-byte JSON checksum.
+    require(comparison["selection_lock_sha256"] == hashlib.sha256(selection_path.read_bytes()).hexdigest(),
+            "The earlier dataset selection record checksum differs.")
+    content_hash = frozen.get("dataset_content_sha256")
+    require(isinstance(content_hash, str) and len(content_hash) == 64
+            and comparison.get("dataset_content_sha256") == content_hash,
+            "The frozen dataset records lack matching content checksums.")
+    require(dataset_content_sha256(path) == content_hash,
+            "Dataset NPY member names, headers or array payloads changed.")
 
 
 def reconstruct_geometry(root):
