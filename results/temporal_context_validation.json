@@ -1,0 +1,3728 @@
+{
+  "schema_version": 1,
+  "hash_policy": "SHA-256; .py/.json/.md normalize CRLF to LF; all other files use raw bytes",
+  "completed_utc": "2026-11-13T18:57:43.765795+00:00",
+  "species": [
+    "A.tomentosum",
+    "C.brasiliensis",
+    "M.guianensis",
+    "M.rubiginosa",
+    "P.ramiflora",
+    "P.torta"
+  ],
+  "model_name": "temporal_cnn_context_25",
+  "model_config": {
+    "seed": 42,
+    "threads": 2,
+    "epochs": 20,
+    "batch_size": 256,
+    "channels": [
+      9,
+      32,
+      64
+    ],
+    "kernel_sizes": [
+      5,
+      3
+    ],
+    "padding": [
+      2,
+      1
+    ],
+    "activation": "GELU",
+    "dropout": 0.2,
+    "pooling": "concatenate temporal global mean and maximum",
+    "head": "Linear(128, 6)",
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.01,
+    "loss": "cross entropy weighted by training n / (6 * class count)",
+    "normalization": "per-channel mean and population std over training samples and time only; std <= 1e-8 replaced with 1",
+    "augmentation": "none"
+  },
+  "n_parameters": 8454,
+  "geometry": {
+    "original_train": 10996,
+    "train": 10113,
+    "original_validation": 32112,
+    "validation": 30114,
+    "test": 14105,
+    "train_counts": [
+      1189,
+      2542,
+      1298,
+      1343,
+      1009,
+      2732
+    ],
+    "validation_counts": [
+      1064,
+      12842,
+      0,
+      11519,
+      0,
+      4689
+    ],
+    "minimum_train_evaluation_distance": 25.0,
+    "minimum_validation_test_distance": 25.0,
+    "validation_rois": [
+      {
+        "roi_id": 2,
+        "original": 6601,
+        "retained": 5437
+      },
+      {
+        "roi_id": 6,
+        "original": 3069,
+        "retained": 3069
+      },
+      {
+        "roi_id": 11,
+        "original": 1064,
+        "retained": 1064
+      },
+      {
+        "roi_id": 15,
+        "original": 1028,
+        "retained": 1028
+      },
+      {
+        "roi_id": 17,
+        "original": 2748,
+        "retained": 2465
+      },
+      {
+        "roi_id": 18,
+        "original": 2224,
+        "retained": 2224
+      },
+      {
+        "roi_id": 23,
+        "original": 7405,
+        "retained": 7405
+      },
+      {
+        "roi_id": 24,
+        "original": 5555,
+        "retained": 5555
+      },
+      {
+        "roi_id": 28,
+        "original": 836,
+        "retained": 285
+      },
+      {
+        "roi_id": 34,
+        "original": 1582,
+        "retained": 1582
+      }
+    ]
+  },
+  "selected_epoch": 1,
+  "best_validation": {
+    "selection_score": 0.41082282859911634,
+    "per_species": [
+      {
+        "species_class": 0,
+        "mean_roi_accuracy": 0.4859022556390977
+      },
+      {
+        "species_class": 1,
+        "mean_roi_accuracy": 0.31289669142471305
+      },
+      {
+        "species_class": 3,
+        "mean_roi_accuracy": 0.01787831374793611
+      },
+      {
+        "species_class": 5,
+        "mean_roi_accuracy": 0.8266140535847184
+      }
+    ],
+    "per_roi": [
+      {
+        "species_class": 0,
+        "roi_id": 11,
+        "n_pixels": 1064,
+        "accuracy": 0.4859022556390977
+      },
+      {
+        "species_class": 1,
+        "roi_id": 2,
+        "n_pixels": 5437,
+        "accuracy": 0.0
+      },
+      {
+        "species_class": 1,
+        "roi_id": 23,
+        "n_pixels": 7405,
+        "accuracy": 0.6257933828494261
+      },
+      {
+        "species_class": 3,
+        "roi_id": 6,
+        "n_pixels": 3069,
+        "accuracy": 0.0
+      },
+      {
+        "species_class": 3,
+        "roi_id": 15,
+        "n_pixels": 1028,
+        "accuracy": 0.0
+      },
+      {
+        "species_class": 3,
+        "roi_id": 24,
+        "n_pixels": 5555,
+        "accuracy": 0.00216021602160216
+      },
+      {
+        "species_class": 3,
+        "roi_id": 28,
+        "n_pixels": 285,
+        "accuracy": 0.0
+      },
+      {
+        "species_class": 3,
+        "roi_id": 34,
+        "n_pixels": 1582,
+        "accuracy": 0.08723135271807839
+      },
+      {
+        "species_class": 5,
+        "roi_id": 17,
+        "n_pixels": 2465,
+        "accuracy": 0.6689655172413793
+      },
+      {
+        "species_class": 5,
+        "roi_id": 18,
+        "n_pixels": 2224,
+        "accuracy": 0.9842625899280576
+      }
+    ],
+    "pooled_metrics": {
+      "accuracy": 0.30348010891943944,
+      "balanced_accuracy_present_classes": 0.41957071227316034,
+      "macro_f1_present_classes": 0.3197481952482179,
+      "classes_present": [
+        0,
+        1,
+        3,
+        5
+      ],
+      "recall": [
+        0.4859022556390977,
+        0.3608472200591808,
+        null,
+        0.013021963712127788,
+        null,
+        0.818511409682235
+      ],
+      "support": [
+        1064,
+        12842,
+        0,
+        11519,
+        0,
+        4689
+      ],
+      "confusion_matrix": [
+        [
+          517,
+          499,
+          5,
+          0,
+          43,
+          0
+        ],
+        [
+          5478,
+          4634,
+          0,
+          31,
+          1663,
+          1036
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          11058,
+          311,
+          150,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          807,
+          0,
+          0,
+          0,
+          44,
+          3838
+        ]
+      ]
+    }
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.205707828091639,
+      "validation": {
+        "selection_score": 0.41082282859911634,
+        "per_species": [
+          {
+            "species_class": 0,
+            "mean_roi_accuracy": 0.4859022556390977
+          },
+          {
+            "species_class": 1,
+            "mean_roi_accuracy": 0.31289669142471305
+          },
+          {
+            "species_class": 3,
+            "mean_roi_accuracy": 0.01787831374793611
+          },
+          {
+            "species_class": 5,
+            "mean_roi_accuracy": 0.8266140535847184
+          }
+        ],
+        "per_roi": [
+          {
+            "species_class": 0,
+            "roi_id": 11,
+            "n_pixels": 1064,
+            "accuracy": 0.4859022556390977
+          },
+          {
+            "species_class": 1,
+            "roi_id": 2,
+            "n_pixels": 5437,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 1,
+            "roi_id": 23,
+            "n_pixels": 7405,
+            "accuracy": 0.6257933828494261
+          },
+          {
+            "species_class": 3,
+            "roi_id": 6,
+            "n_pixels": 3069,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 15,
+            "n_pixels": 1028,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 24,
+            "n_pixels": 5555,
+            "accuracy": 0.00216021602160216
+          },
+          {
+            "species_class": 3,
+            "roi_id": 28,
+            "n_pixels": 285,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 34,
+            "n_pixels": 1582,
+            "accuracy": 0.08723135271807839
+          },
+          {
+            "species_class": 5,
+            "roi_id": 17,
+            "n_pixels": 2465,
+            "accuracy": 0.6689655172413793
+          },
+          {
+            "species_class": 5,
+            "roi_id": 18,
+            "n_pixels": 2224,
+            "accuracy": 0.9842625899280576
+          }
+        ],
+        "pooled_metrics": {
+          "accuracy": 0.30348010891943944,
+          "balanced_accuracy_present_classes": 0.41957071227316034,
+          "macro_f1_present_classes": 0.3197481952482179,
+          "classes_present": [
+            0,
+            1,
+            3,
+            5
+          ],
+          "recall": [
+            0.4859022556390977,
+            0.3608472200591808,
+            null,
+            0.013021963712127788,
+            null,
+            0.818511409682235
+          ],
+          "support": [
+            1064,
+            12842,
+            0,
+            11519,
+            0,
+            4689
+          ],
+          "confusion_matrix": [
+            [
+              517,
+              499,
+              5,
+              0,
+              43,
+              0
+            ],
+            [
+              5478,
+              4634,
+              0,
+              31,
+              1663,
+              1036
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              11058,
+              311,
+              150,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              807,
+              0,
+              0,
+              0,
+              44,
+              3838
+            ]
+          ]
+        }
+      },
+      "train_seconds": 1.3567332999955397,
+      "validation_predict_seconds": 0.6044009000179358
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.27401576681307677,
+      "validation": {
+        "selection_score": 0.39919925961742764,
+        "per_species": [
+          {
+            "species_class": 0,
+            "mean_roi_accuracy": 0.47368421052631576
+          },
+          {
+            "species_class": 1,
+            "mean_roi_accuracy": 0.32768399729912223
+          },
+          {
+            "species_class": 3,
+            "mean_roi_accuracy": 0.006826801517067003
+          },
+          {
+            "species_class": 5,
+            "mean_roi_accuracy": 0.7886020291272053
+          }
+        ],
+        "per_roi": [
+          {
+            "species_class": 0,
+            "roi_id": 11,
+            "n_pixels": 1064,
+            "accuracy": 0.47368421052631576
+          },
+          {
+            "species_class": 1,
+            "roi_id": 2,
+            "n_pixels": 5437,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 1,
+            "roi_id": 23,
+            "n_pixels": 7405,
+            "accuracy": 0.6553679945982445
+          },
+          {
+            "species_class": 3,
+            "roi_id": 6,
+            "n_pixels": 3069,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 15,
+            "n_pixels": 1028,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 24,
+            "n_pixels": 5555,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 28,
+            "n_pixels": 285,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 34,
+            "n_pixels": 1582,
+            "accuracy": 0.03413400758533502
+          },
+          {
+            "species_class": 5,
+            "roi_id": 17,
+            "n_pixels": 2465,
+            "accuracy": 0.5821501014198783
+          },
+          {
+            "species_class": 5,
+            "roi_id": 18,
+            "n_pixels": 2224,
+            "accuracy": 0.9950539568345323
+          }
+        ],
+        "pooled_metrics": {
+          "accuracy": 0.3008235372252109,
+          "balanced_accuracy_present_classes": 0.4085659497146972,
+          "macro_f1_present_classes": 0.3037204320835473,
+          "classes_present": [
+            0,
+            1,
+            3,
+            5
+          ],
+          "recall": [
+            0.47368421052631576,
+            0.37790063852982403,
+            null,
+            0.004687906936366004,
+            null,
+            0.7779910428662828
+          ],
+          "support": [
+            1064,
+            12842,
+            0,
+            11519,
+            0,
+            4689
+          ],
+          "confusion_matrix": [
+            [
+              504,
+              481,
+              18,
+              0,
+              61,
+              0
+            ],
+            [
+              3878,
+              4853,
+              0,
+              0,
+              2276,
+              1835
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              10980,
+              485,
+              54,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1041,
+              0,
+              0,
+              0,
+              0,
+              3648
+            ]
+          ]
+        }
+      },
+      "train_seconds": 1.1921417000121437,
+      "validation_predict_seconds": 0.6285803999926429
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.07032380196439798,
+      "validation": {
+        "selection_score": 0.38681333608297636,
+        "per_species": [
+          {
+            "species_class": 0,
+            "mean_roi_accuracy": 0.5234962406015038
+          },
+          {
+            "species_class": 1,
+            "mean_roi_accuracy": 0.299797434166104
+          },
+          {
+            "species_class": 3,
+            "mean_roi_accuracy": 0.003286978508217446
+          },
+          {
+            "species_class": 5,
+            "mean_roi_accuracy": 0.7206726910560801
+          }
+        ],
+        "per_roi": [
+          {
+            "species_class": 0,
+            "roi_id": 11,
+            "n_pixels": 1064,
+            "accuracy": 0.5234962406015038
+          },
+          {
+            "species_class": 1,
+            "roi_id": 2,
+            "n_pixels": 5437,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 1,
+            "roi_id": 23,
+            "n_pixels": 7405,
+            "accuracy": 0.599594868332208
+          },
+          {
+            "species_class": 3,
+            "roi_id": 6,
+            "n_pixels": 3069,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 15,
+            "n_pixels": 1028,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 24,
+            "n_pixels": 5555,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 28,
+            "n_pixels": 285,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 34,
+            "n_pixels": 1582,
+            "accuracy": 0.01643489254108723
+          },
+          {
+            "species_class": 5,
+            "roi_id": 17,
+            "n_pixels": 2465,
+            "accuracy": 0.445841784989858
+          },
+          {
+            "species_class": 5,
+            "roi_id": 18,
+            "n_pixels": 2224,
+            "accuracy": 0.9955035971223022
+          }
+        ],
+        "pooled_metrics": {
+          "accuracy": 0.2768147705386199,
+          "balanced_accuracy_present_classes": 0.3945102895130631,
+          "macro_f1_present_classes": 0.27706747721559044,
+          "classes_present": [
+            0,
+            1,
+            3,
+            5
+          ],
+          "recall": [
+            0.5234962406015038,
+            0.3457405388568759,
+            null,
+            0.0022571403767688166,
+            null,
+            0.7065472382171039
+          ],
+          "support": [
+            1064,
+            12842,
+            0,
+            11519,
+            0,
+            4689
+          ],
+          "confusion_matrix": [
+            [
+              557,
+              414,
+              52,
+              0,
+              20,
+              21
+            ],
+            [
+              3905,
+              4440,
+              0,
+              0,
+              1863,
+              2634
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              10001,
+              1492,
+              26,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1376,
+              0,
+              0,
+              0,
+              0,
+              3313
+            ]
+          ]
+        }
+      },
+      "train_seconds": 1.2406576999928802,
+      "validation_predict_seconds": 0.6975413000036497
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.02875269140461118,
+      "validation": {
+        "selection_score": 0.37394931297108136,
+        "per_species": [
+          {
+            "species_class": 0,
+            "mean_roi_accuracy": 0.5441729323308271
+          },
+          {
+            "species_class": 1,
+            "mean_roi_accuracy": 0.27569209993247806
+          },
+          {
+            "species_class": 3,
+            "mean_roi_accuracy": 0.0039190897597977245
+          },
+          {
+            "species_class": 5,
+            "mean_roi_accuracy": 0.6720131298612226
+          }
+        ],
+        "per_roi": [
+          {
+            "species_class": 0,
+            "roi_id": 11,
+            "n_pixels": 1064,
+            "accuracy": 0.5441729323308271
+          },
+          {
+            "species_class": 1,
+            "roi_id": 2,
+            "n_pixels": 5437,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 1,
+            "roi_id": 23,
+            "n_pixels": 7405,
+            "accuracy": 0.5513841998649561
+          },
+          {
+            "species_class": 3,
+            "roi_id": 6,
+            "n_pixels": 3069,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 15,
+            "n_pixels": 1028,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 24,
+            "n_pixels": 5555,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 28,
+            "n_pixels": 285,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 34,
+            "n_pixels": 1582,
+            "accuracy": 0.019595448798988623
+          },
+          {
+            "species_class": 5,
+            "roi_id": 17,
+            "n_pixels": 2465,
+            "accuracy": 0.34807302231237325
+          },
+          {
+            "species_class": 5,
+            "roi_id": 18,
+            "n_pixels": 2224,
+            "accuracy": 0.9959532374100719
+          }
+        ],
+        "pooled_metrics": {
+          "accuracy": 0.25788669721724117,
+          "balanced_accuracy_present_classes": 0.3800422214513933,
+          "macro_f1_present_classes": 0.26136975173747257,
+          "classes_present": [
+            0,
+            1,
+            3,
+            5
+          ],
+          "recall": [
+            0.5441729323308271,
+            0.31794113066500546,
+            null,
+            0.0026912058338397432,
+            null,
+            0.6553636169759011
+          ],
+          "support": [
+            1064,
+            12842,
+            0,
+            11519,
+            0,
+            4689
+          ],
+          "confusion_matrix": [
+            [
+              579,
+              375,
+              57,
+              0,
+              17,
+              36
+            ],
+            [
+              3952,
+              4083,
+              0,
+              0,
+              1917,
+              2890
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              9519,
+              1969,
+              31,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1616,
+              0,
+              0,
+              0,
+              0,
+              3073
+            ]
+          ]
+        }
+      },
+      "train_seconds": 1.1630279999808408,
+      "validation_predict_seconds": 0.6704249000176787
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.01607724432324626,
+      "validation": {
+        "selection_score": 0.3709560259556719,
+        "per_species": [
+          {
+            "species_class": 0,
+            "mean_roi_accuracy": 0.5808270676691729
+          },
+          {
+            "species_class": 1,
+            "mean_roi_accuracy": 0.2575286968264686
+          },
+          {
+            "species_class": 3,
+            "mean_roi_accuracy": 0.004171934260429835
+          },
+          {
+            "species_class": 5,
+            "mean_roi_accuracy": 0.6412964050666161
+          }
+        ],
+        "per_roi": [
+          {
+            "species_class": 0,
+            "roi_id": 11,
+            "n_pixels": 1064,
+            "accuracy": 0.5808270676691729
+          },
+          {
+            "species_class": 1,
+            "roi_id": 2,
+            "n_pixels": 5437,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 1,
+            "roi_id": 23,
+            "n_pixels": 7405,
+            "accuracy": 0.5150573936529372
+          },
+          {
+            "species_class": 3,
+            "roi_id": 6,
+            "n_pixels": 3069,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 15,
+            "n_pixels": 1028,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 24,
+            "n_pixels": 5555,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 28,
+            "n_pixels": 285,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 34,
+            "n_pixels": 1582,
+            "accuracy": 0.020859671302149177
+          },
+          {
+            "species_class": 5,
+            "roi_id": 17,
+            "n_pixels": 2465,
+            "accuracy": 0.28843813387423933
+          },
+          {
+            "species_class": 5,
+            "roi_id": 18,
+            "n_pixels": 2224,
+            "accuracy": 0.9941546762589928
+          }
+        ],
+        "pooled_metrics": {
+          "accuracy": 0.24530118881583315,
+          "balanced_accuracy_present_classes": 0.3759616814887927,
+          "macro_f1_present_classes": 0.25580667241210847,
+          "classes_present": [
+            0,
+            1,
+            3,
+            5
+          ],
+          "recall": [
+            0.5808270676691729,
+            0.29699423765768573,
+            null,
+            0.0028648320166681134,
+            null,
+            0.6231605886116443
+          ],
+          "support": [
+            1064,
+            12842,
+            0,
+            11519,
+            0,
+            4689
+          ],
+          "confusion_matrix": [
+            [
+              618,
+              329,
+              74,
+              0,
+              3,
+              40
+            ],
+            [
+              4647,
+              3814,
+              0,
+              0,
+              1708,
+              2673
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              8545,
+              2941,
+              33,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1767,
+              0,
+              0,
+              0,
+              0,
+              2922
+            ]
+          ]
+        }
+      },
+      "train_seconds": 1.2689367000130005,
+      "validation_predict_seconds": 0.6385627000126988
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.010225785112983018,
+      "validation": {
+        "selection_score": 0.3678053664951422,
+        "per_species": [
+          {
+            "species_class": 0,
+            "mean_roi_accuracy": 0.5977443609022557
+          },
+          {
+            "species_class": 1,
+            "mean_roi_accuracy": 0.24632005401755572
+          },
+          {
+            "species_class": 3,
+            "mean_roi_accuracy": 0.008102061786456774
+          },
+          {
+            "species_class": 5,
+            "mean_roi_accuracy": 0.6190549892743007
+          }
+        ],
+        "per_roi": [
+          {
+            "species_class": 0,
+            "roi_id": 11,
+            "n_pixels": 1064,
+            "accuracy": 0.5977443609022557
+          },
+          {
+            "species_class": 1,
+            "roi_id": 2,
+            "n_pixels": 5437,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 1,
+            "roi_id": 23,
+            "n_pixels": 7405,
+            "accuracy": 0.49264010803511143
+          },
+          {
+            "species_class": 3,
+            "roi_id": 6,
+            "n_pixels": 3069,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 15,
+            "n_pixels": 1028,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 24,
+            "n_pixels": 5555,
+            "accuracy": 0.010801080108010801
+          },
+          {
+            "species_class": 3,
+            "roi_id": 28,
+            "n_pixels": 285,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 34,
+            "n_pixels": 1582,
+            "accuracy": 0.02970922882427307
+          },
+          {
+            "species_class": 5,
+            "roi_id": 17,
+            "n_pixels": 2465,
+            "accuracy": 0.24665314401622718
+          },
+          {
+            "species_class": 5,
+            "roi_id": 18,
+            "n_pixels": 2224,
+            "accuracy": 0.9914568345323741
+          }
+        ],
+        "pooled_metrics": {
+          "accuracy": 0.23922428106528526,
+          "balanced_accuracy_present_classes": 0.3727539894610228,
+          "macro_f1_present_classes": 0.25500742566719337,
+          "classes_present": [
+            0,
+            1,
+            3,
+            5
+          ],
+          "recall": [
+            0.5977443609022557,
+            0.28406790219591965,
+            null,
+            0.009289000781317823,
+            null,
+            0.599914693964598
+          ],
+          "support": [
+            1064,
+            12842,
+            0,
+            11519,
+            0,
+            4689
+          ],
+          "confusion_matrix": [
+            [
+              636,
+              310,
+              64,
+              0,
+              5,
+              49
+            ],
+            [
+              4914,
+              3648,
+              0,
+              0,
+              1750,
+              2530
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              8040,
+              3372,
+              107,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1876,
+              0,
+              0,
+              0,
+              0,
+              2813
+            ]
+          ]
+        }
+      },
+      "train_seconds": 1.3639775000046939,
+      "validation_predict_seconds": 0.6566656999930274
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.007320367209570177,
+      "validation": {
+        "selection_score": 0.36541626144926354,
+        "per_species": [
+          {
+            "species_class": 0,
+            "mean_roi_accuracy": 0.5968045112781954
+          },
+          {
+            "species_class": 1,
+            "mean_roi_accuracy": 0.23828494260634706
+          },
+          {
+            "species_class": 3,
+            "mean_roi_accuracy": 0.005519201730539679
+          },
+          {
+            "species_class": 5,
+            "mean_roi_accuracy": 0.6210563901819721
+          }
+        ],
+        "per_roi": [
+          {
+            "species_class": 0,
+            "roi_id": 11,
+            "n_pixels": 1064,
+            "accuracy": 0.5968045112781954
+          },
+          {
+            "species_class": 1,
+            "roi_id": 2,
+            "n_pixels": 5437,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 1,
+            "roi_id": 23,
+            "n_pixels": 7405,
+            "accuracy": 0.4765698852126941
+          },
+          {
+            "species_class": 3,
+            "roi_id": 6,
+            "n_pixels": 3069,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 15,
+            "n_pixels": 1028,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 24,
+            "n_pixels": 5555,
+            "accuracy": 0.011161116111611162
+          },
+          {
+            "species_class": 3,
+            "roi_id": 28,
+            "n_pixels": 285,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 34,
+            "n_pixels": 1582,
+            "accuracy": 0.01643489254108723
+          },
+          {
+            "species_class": 5,
+            "roi_id": 17,
+            "n_pixels": 2465,
+            "accuracy": 0.24705882352941178
+          },
+          {
+            "species_class": 5,
+            "roi_id": 18,
+            "n_pixels": 2224,
+            "accuracy": 0.9950539568345323
+          }
+        ],
+        "pooled_metrics": {
+          "accuracy": 0.2349073520621638,
+          "balanced_accuracy_present_classes": 0.37026989397060406,
+          "macro_f1_present_classes": 0.2525084324874776,
+          "classes_present": [
+            0,
+            1,
+            3,
+            5
+          ],
+          "recall": [
+            0.5968045112781954,
+            0.2748014327986295,
+            null,
+            0.007639552044448303,
+            null,
+            0.6018340797611431
+          ],
+          "support": [
+            1064,
+            12842,
+            0,
+            11519,
+            0,
+            4689
+          ],
+          "confusion_matrix": [
+            [
+              635,
+              243,
+              126,
+              0,
+              5,
+              55
+            ],
+            [
+              4281,
+              3529,
+              0,
+              0,
+              1955,
+              3077
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              6701,
+              4730,
+              88,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1867,
+              0,
+              0,
+              0,
+              0,
+              2822
+            ]
+          ]
+        }
+      },
+      "train_seconds": 1.1981695000140462,
+      "validation_predict_seconds": 0.5926239999826066
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.004620564714964145,
+      "validation": {
+        "selection_score": 0.3664346512737806,
+        "per_species": [
+          {
+            "species_class": 0,
+            "mean_roi_accuracy": 0.6080827067669173
+          },
+          {
+            "species_class": 1,
+            "mean_roi_accuracy": 0.23808237677245106
+          },
+          {
+            "species_class": 3,
+            "mean_roi_accuracy": 0.00595124493486011
+          },
+          {
+            "species_class": 5,
+            "mean_roi_accuracy": 0.613622276620894
+          }
+        ],
+        "per_roi": [
+          {
+            "species_class": 0,
+            "roi_id": 11,
+            "n_pixels": 1064,
+            "accuracy": 0.6080827067669173
+          },
+          {
+            "species_class": 1,
+            "roi_id": 2,
+            "n_pixels": 5437,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 1,
+            "roi_id": 23,
+            "n_pixels": 7405,
+            "accuracy": 0.4761647535449021
+          },
+          {
+            "species_class": 3,
+            "roi_id": 6,
+            "n_pixels": 3069,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 15,
+            "n_pixels": 1028,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 24,
+            "n_pixels": 5555,
+            "accuracy": 0.01332133213321332
+          },
+          {
+            "species_class": 3,
+            "roi_id": 28,
+            "n_pixels": 285,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 34,
+            "n_pixels": 1582,
+            "accuracy": 0.01643489254108723
+          },
+          {
+            "species_class": 5,
+            "roi_id": 17,
+            "n_pixels": 2465,
+            "accuracy": 0.23488843813387425
+          },
+          {
+            "species_class": 5,
+            "roi_id": 18,
+            "n_pixels": 2224,
+            "accuracy": 0.9923561151079137
+          }
+        ],
+        "pooled_metrics": {
+          "accuracy": 0.2344092448694959,
+          "balanced_accuracy_present_classes": 0.3713720942024319,
+          "macro_f1_present_classes": 0.25466771572788505,
+          "classes_present": [
+            0,
+            1,
+            3,
+            5
+          ],
+          "recall": [
+            0.6080827067669173,
+            0.2745678243264289,
+            null,
+            0.008681309141418526,
+            null,
+            0.5941565365749627
+          ],
+          "support": [
+            1064,
+            12842,
+            0,
+            11519,
+            0,
+            4689
+          ],
+          "confusion_matrix": [
+            [
+              647,
+              252,
+              107,
+              0,
+              3,
+              55
+            ],
+            [
+              4555,
+              3526,
+              0,
+              0,
+              2045,
+              2716
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              6947,
+              4472,
+              100,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1903,
+              0,
+              0,
+              0,
+              0,
+              2786
+            ]
+          ]
+        }
+      },
+      "train_seconds": 1.1999552999914158,
+      "validation_predict_seconds": 0.5976398999919184
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.0032884516705214343,
+      "validation": {
+        "selection_score": 0.3653632943082772,
+        "per_species": [
+          {
+            "species_class": 0,
+            "mean_roi_accuracy": 0.6212406015037594
+          },
+          {
+            "species_class": 1,
+            "mean_roi_accuracy": 0.2323430114787306
+          },
+          {
+            "species_class": 3,
+            "mean_roi_accuracy": 0.00872679935503032
+          },
+          {
+            "species_class": 5,
+            "mean_roi_accuracy": 0.5991427648955886
+          }
+        ],
+        "per_roi": [
+          {
+            "species_class": 0,
+            "roi_id": 11,
+            "n_pixels": 1064,
+            "accuracy": 0.6212406015037594
+          },
+          {
+            "species_class": 1,
+            "roi_id": 2,
+            "n_pixels": 5437,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 1,
+            "roi_id": 23,
+            "n_pixels": 7405,
+            "accuracy": 0.4646860229574612
+          },
+          {
+            "species_class": 3,
+            "roi_id": 6,
+            "n_pixels": 3069,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 15,
+            "n_pixels": 1028,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 24,
+            "n_pixels": 5555,
+            "accuracy": 0.02214221422142214
+          },
+          {
+            "species_class": 3,
+            "roi_id": 28,
+            "n_pixels": 285,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 34,
+            "n_pixels": 1582,
+            "accuracy": 0.021491782553729456
+          },
+          {
+            "species_class": 5,
+            "roi_id": 17,
+            "n_pixels": 2465,
+            "accuracy": 0.21582150101419878
+          },
+          {
+            "species_class": 5,
+            "roi_id": 18,
+            "n_pixels": 2224,
+            "accuracy": 0.9824640287769785
+          }
+        ],
+        "pooled_metrics": {
+          "accuracy": 0.23165305173673376,
+          "balanced_accuracy_present_classes": 0.3705651049844955,
+          "macro_f1_present_classes": 0.26179004984297816,
+          "classes_present": [
+            0,
+            1,
+            3,
+            5
+          ],
+          "recall": [
+            0.6212406015037594,
+            0.2679489176140788,
+            null,
+            0.013629655352027086,
+            null,
+            0.5794412454681168
+          ],
+          "support": [
+            1064,
+            12842,
+            0,
+            11519,
+            0,
+            4689
+          ],
+          "confusion_matrix": [
+            [
+              661,
+              145,
+              200,
+              0,
+              1,
+              57
+            ],
+            [
+              4984,
+              3441,
+              0,
+              0,
+              2009,
+              2408
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              5249,
+              6113,
+              157,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1972,
+              0,
+              0,
+              0,
+              0,
+              2717
+            ]
+          ]
+        }
+      },
+      "train_seconds": 1.2074314999917988,
+      "validation_predict_seconds": 0.6020750999741722
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.0026067214984355816,
+      "validation": {
+        "selection_score": 0.366131508595932,
+        "per_species": [
+          {
+            "species_class": 0,
+            "mean_roi_accuracy": 0.6287593984962406
+          },
+          {
+            "species_class": 1,
+            "mean_roi_accuracy": 0.22714382174206618
+          },
+          {
+            "species_class": 3,
+            "mean_roi_accuracy": 0.010943888320564041
+          },
+          {
+            "species_class": 5,
+            "mean_roi_accuracy": 0.5976789258248574
+          }
+        ],
+        "per_roi": [
+          {
+            "species_class": 0,
+            "roi_id": 11,
+            "n_pixels": 1064,
+            "accuracy": 0.6287593984962406
+          },
+          {
+            "species_class": 1,
+            "roi_id": 2,
+            "n_pixels": 5437,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 1,
+            "roi_id": 23,
+            "n_pixels": 7405,
+            "accuracy": 0.45428764348413236
+          },
+          {
+            "species_class": 3,
+            "roi_id": 6,
+            "n_pixels": 3069,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 15,
+            "n_pixels": 1028,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 24,
+            "n_pixels": 5555,
+            "accuracy": 0.0288028802880288
+          },
+          {
+            "species_class": 3,
+            "roi_id": 28,
+            "n_pixels": 285,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 34,
+            "n_pixels": 1582,
+            "accuracy": 0.025916561314791402
+          },
+          {
+            "species_class": 5,
+            "roi_id": 17,
+            "n_pixels": 2465,
+            "accuracy": 0.21379310344827587
+          },
+          {
+            "species_class": 5,
+            "roi_id": 18,
+            "n_pixels": 2224,
+            "accuracy": 0.9815647482014388
+          }
+        ],
+        "pooled_metrics": {
+          "accuracy": 0.23059042305904232,
+          "balanced_accuracy_present_classes": 0.37152754663666765,
+          "macro_f1_present_classes": 0.25991248214739787,
+          "classes_present": [
+            0,
+            1,
+            3,
+            5
+          ],
+          "recall": [
+            0.6287593984962406,
+            0.26195296682759694,
+            null,
+            0.017449431374251236,
+            null,
+            0.5779483898485818
+          ],
+          "support": [
+            1064,
+            12842,
+            0,
+            11519,
+            0,
+            4689
+          ],
+          "confusion_matrix": [
+            [
+              669,
+              153,
+              178,
+              0,
+              1,
+              63
+            ],
+            [
+              4903,
+              3364,
+              0,
+              0,
+              1979,
+              2596
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              5263,
+              6053,
+              201,
+              2,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1979,
+              0,
+              0,
+              0,
+              0,
+              2710
+            ]
+          ]
+        }
+      },
+      "train_seconds": 1.1926372000016272,
+      "validation_predict_seconds": 0.7806047000049148
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.0022211984913584728,
+      "validation": {
+        "selection_score": 0.365372028846494,
+        "per_species": [
+          {
+            "species_class": 0,
+            "mean_roi_accuracy": 0.6259398496240601
+          },
+          {
+            "species_class": 1,
+            "mean_roi_accuracy": 0.22876434841323431
+          },
+          {
+            "species_class": 3,
+            "mean_roi_accuracy": 0.007174548048989475
+          },
+          {
+            "species_class": 5,
+            "mean_roi_accuracy": 0.5996093692996921
+          }
+        ],
+        "per_roi": [
+          {
+            "species_class": 0,
+            "roi_id": 11,
+            "n_pixels": 1064,
+            "accuracy": 0.6259398496240601
+          },
+          {
+            "species_class": 1,
+            "roi_id": 2,
+            "n_pixels": 5437,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 1,
+            "roi_id": 23,
+            "n_pixels": 7405,
+            "accuracy": 0.45752869682646863
+          },
+          {
+            "species_class": 3,
+            "roi_id": 6,
+            "n_pixels": 3069,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 15,
+            "n_pixels": 1028,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 24,
+            "n_pixels": 5555,
+            "accuracy": 0.020702070207020702
+          },
+          {
+            "species_class": 3,
+            "roi_id": 28,
+            "n_pixels": 285,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 34,
+            "n_pixels": 1582,
+            "accuracy": 0.015170670037926675
+          },
+          {
+            "species_class": 5,
+            "roi_id": 17,
+            "n_pixels": 2465,
+            "accuracy": 0.21135902636916837
+          },
+          {
+            "species_class": 5,
+            "roi_id": 18,
+            "n_pixels": 2224,
+            "accuracy": 0.9878597122302158
+          }
+        ],
+        "pooled_metrics": {
+          "accuracy": 0.22949458723517302,
+          "balanced_accuracy_present_classes": 0.37037080362311386,
+          "macro_f1_present_classes": 0.25643185694493464,
+          "classes_present": [
+            0,
+            1,
+            3,
+            5
+          ],
+          "recall": [
+            0.6259398496240601,
+            0.2638218346052017,
+            null,
+            0.01206701970657175,
+            null,
+            0.5796545105566219
+          ],
+          "support": [
+            1064,
+            12842,
+            0,
+            11519,
+            0,
+            4689
+          ],
+          "confusion_matrix": [
+            [
+              666,
+              161,
+              177,
+              0,
+              0,
+              60
+            ],
+            [
+              4802,
+              3388,
+              0,
+              0,
+              1924,
+              2728
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              5325,
+              6053,
+              139,
+              2,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1971,
+              0,
+              0,
+              0,
+              0,
+              2718
+            ]
+          ]
+        }
+      },
+      "train_seconds": 1.3411923999956343,
+      "validation_predict_seconds": 0.6488089000049513
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.0017326794424480524,
+      "validation": {
+        "selection_score": 0.3668706942083955,
+        "per_species": [
+          {
+            "species_class": 0,
+            "mean_roi_accuracy": 0.6343984962406015
+          },
+          {
+            "species_class": 1,
+            "mean_roi_accuracy": 0.22815665091154624
+          },
+          {
+            "species_class": 3,
+            "mean_roi_accuracy": 0.006579259695881093
+          },
+          {
+            "species_class": 5,
+            "mean_roi_accuracy": 0.5983483699855532
+          }
+        ],
+        "per_roi": [
+          {
+            "species_class": 0,
+            "roi_id": 11,
+            "n_pixels": 1064,
+            "accuracy": 0.6343984962406015
+          },
+          {
+            "species_class": 1,
+            "roi_id": 2,
+            "n_pixels": 5437,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 1,
+            "roi_id": 23,
+            "n_pixels": 7405,
+            "accuracy": 0.4563133018230925
+          },
+          {
+            "species_class": 3,
+            "roi_id": 6,
+            "n_pixels": 3069,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 15,
+            "n_pixels": 1028,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 24,
+            "n_pixels": 5555,
+            "accuracy": 0.019621962196219624
+          },
+          {
+            "species_class": 3,
+            "roi_id": 28,
+            "n_pixels": 285,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 34,
+            "n_pixels": 1582,
+            "accuracy": 0.01327433628318584
+          },
+          {
+            "species_class": 5,
+            "roi_id": 17,
+            "n_pixels": 2465,
+            "accuracy": 0.20973630831643003
+          },
+          {
+            "species_class": 5,
+            "roi_id": 18,
+            "n_pixels": 2224,
+            "accuracy": 0.9869604316546763
+          }
+        ],
+        "pooled_metrics": {
+          "accuracy": 0.22899648004250514,
+          "balanced_accuracy_present_classes": 0.37179503183465934,
+          "macro_f1_present_classes": 0.25606266058994154,
+          "classes_present": [
+            0,
+            1,
+            3,
+            5
+          ],
+          "recall": [
+            0.6343984962406015,
+            0.26312100918859993,
+            null,
+            0.011285701883844083,
+            null,
+            0.5783749200255918
+          ],
+          "support": [
+            1064,
+            12842,
+            0,
+            11519,
+            0,
+            4689
+          ],
+          "confusion_matrix": [
+            [
+              675,
+              171,
+              159,
+              0,
+              0,
+              59
+            ],
+            [
+              5001,
+              3379,
+              0,
+              0,
+              1825,
+              2637
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              5417,
+              5970,
+              130,
+              2,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1977,
+              0,
+              0,
+              0,
+              0,
+              2712
+            ]
+          ]
+        }
+      },
+      "train_seconds": 1.290714399976423,
+      "validation_predict_seconds": 0.6970715000061318
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.0014054689994884902,
+      "validation": {
+        "selection_score": 0.3660664976947891,
+        "per_species": [
+          {
+            "species_class": 0,
+            "mean_roi_accuracy": 0.6287593984962406
+          },
+          {
+            "species_class": 1,
+            "mean_roi_accuracy": 0.22930452397029036
+          },
+          {
+            "species_class": 3,
+            "mean_roi_accuracy": 0.0062359965452929616
+          },
+          {
+            "species_class": 5,
+            "mean_roi_accuracy": 0.5999660717673325
+          }
+        ],
+        "per_roi": [
+          {
+            "species_class": 0,
+            "roi_id": 11,
+            "n_pixels": 1064,
+            "accuracy": 0.6287593984962406
+          },
+          {
+            "species_class": 1,
+            "roi_id": 2,
+            "n_pixels": 5437,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 1,
+            "roi_id": 23,
+            "n_pixels": 7405,
+            "accuracy": 0.4586090479405807
+          },
+          {
+            "species_class": 3,
+            "roi_id": 6,
+            "n_pixels": 3069,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 15,
+            "n_pixels": 1028,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 24,
+            "n_pixels": 5555,
+            "accuracy": 0.019801980198019802
+          },
+          {
+            "species_class": 3,
+            "roi_id": 28,
+            "n_pixels": 285,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 34,
+            "n_pixels": 1582,
+            "accuracy": 0.011378002528445006
+          },
+          {
+            "species_class": 5,
+            "roi_id": 17,
+            "n_pixels": 2465,
+            "accuracy": 0.20892494929006086
+          },
+          {
+            "species_class": 5,
+            "roi_id": 18,
+            "n_pixels": 2224,
+            "accuracy": 0.9910071942446043
+          }
+        ],
+        "pooled_metrics": {
+          "accuracy": 0.22952779438135087,
+          "balanced_accuracy_present_classes": 0.3710460100933633,
+          "macro_f1_present_classes": 0.25748249565057435,
+          "classes_present": [
+            0,
+            1,
+            3,
+            5
+          ],
+          "recall": [
+            0.6287593984962406,
+            0.26444479053106995,
+            null,
+            0.011112075701015713,
+            null,
+            0.5798677756451269
+          ],
+          "support": [
+            1064,
+            12842,
+            0,
+            11519,
+            0,
+            4689
+          ],
+          "confusion_matrix": [
+            [
+              669,
+              165,
+              170,
+              0,
+              0,
+              60
+            ],
+            [
+              4800,
+              3396,
+              0,
+              0,
+              1979,
+              2667
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              5225,
+              6164,
+              128,
+              2,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1970,
+              0,
+              0,
+              0,
+              0,
+              2719
+            ]
+          ]
+        }
+      },
+      "train_seconds": 1.2809347000147682,
+      "validation_predict_seconds": 0.6935915999929421
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.0013393042008180746,
+      "validation": {
+        "selection_score": 0.367431059768513,
+        "per_species": [
+          {
+            "species_class": 0,
+            "mean_roi_accuracy": 0.6428571428571429
+          },
+          {
+            "species_class": 1,
+            "mean_roi_accuracy": 0.2288318703578663
+          },
+          {
+            "species_class": 3,
+            "mean_roi_accuracy": 0.007389750353037833
+          },
+          {
+            "species_class": 5,
+            "mean_roi_accuracy": 0.5906454755060049
+          }
+        ],
+        "per_roi": [
+          {
+            "species_class": 0,
+            "roi_id": 11,
+            "n_pixels": 1064,
+            "accuracy": 0.6428571428571429
+          },
+          {
+            "species_class": 1,
+            "roi_id": 2,
+            "n_pixels": 5437,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 1,
+            "roi_id": 23,
+            "n_pixels": 7405,
+            "accuracy": 0.4576637407157326
+          },
+          {
+            "species_class": 3,
+            "roi_id": 6,
+            "n_pixels": 3069,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 15,
+            "n_pixels": 1028,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 24,
+            "n_pixels": 5555,
+            "accuracy": 0.02304230423042304
+          },
+          {
+            "species_class": 3,
+            "roi_id": 28,
+            "n_pixels": 285,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 34,
+            "n_pixels": 1582,
+            "accuracy": 0.01390644753476612
+          },
+          {
+            "species_class": 5,
+            "roi_id": 17,
+            "n_pixels": 2465,
+            "accuracy": 0.19837728194726167
+          },
+          {
+            "species_class": 5,
+            "roi_id": 18,
+            "n_pixels": 2224,
+            "accuracy": 0.9829136690647482
+          }
+        ],
+        "pooled_metrics": {
+          "accuracy": 0.22906289433486085,
+          "balanced_accuracy_present_classes": 0.3725657306040281,
+          "macro_f1_present_classes": 0.25872578647793376,
+          "classes_present": [
+            0,
+            1,
+            3,
+            5
+          ],
+          "recall": [
+            0.6428571428571429,
+            0.2638997040959352,
+            null,
+            0.013021963712127788,
+            null,
+            0.5704841117509064
+          ],
+          "support": [
+            1064,
+            12842,
+            0,
+            11519,
+            0,
+            4689
+          ],
+          "confusion_matrix": [
+            [
+              684,
+              170,
+              150,
+              0,
+              0,
+              60
+            ],
+            [
+              5233,
+              3389,
+              0,
+              0,
+              1792,
+              2428
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              5180,
+              6187,
+              150,
+              2,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2014,
+              0,
+              0,
+              0,
+              0,
+              2675
+            ]
+          ]
+        }
+      },
+      "train_seconds": 1.3332030000165105,
+      "validation_predict_seconds": 0.6920026000007056
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.0011425017198510442,
+      "validation": {
+        "selection_score": 0.3646050828216679,
+        "per_species": [
+          {
+            "species_class": 0,
+            "mean_roi_accuracy": 0.6362781954887218
+          },
+          {
+            "species_class": 1,
+            "mean_roi_accuracy": 0.22721134368669818
+          },
+          {
+            "species_class": 3,
+            "mean_roi_accuracy": 0.00856191561001865
+          },
+          {
+            "species_class": 5,
+            "mean_roi_accuracy": 0.5863688765012331
+          }
+        ],
+        "per_roi": [
+          {
+            "species_class": 0,
+            "roi_id": 11,
+            "n_pixels": 1064,
+            "accuracy": 0.6362781954887218
+          },
+          {
+            "species_class": 1,
+            "roi_id": 2,
+            "n_pixels": 5437,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 1,
+            "roi_id": 23,
+            "n_pixels": 7405,
+            "accuracy": 0.45442268737339636
+          },
+          {
+            "species_class": 3,
+            "roi_id": 6,
+            "n_pixels": 3069,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 15,
+            "n_pixels": 1028,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 24,
+            "n_pixels": 5555,
+            "accuracy": 0.02574257425742574
+          },
+          {
+            "species_class": 3,
+            "roi_id": 28,
+            "n_pixels": 285,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 34,
+            "n_pixels": 1582,
+            "accuracy": 0.01706700379266751
+          },
+          {
+            "species_class": 5,
+            "roi_id": 17,
+            "n_pixels": 2465,
+            "accuracy": 0.19432048681541583
+          },
+          {
+            "species_class": 5,
+            "roi_id": 18,
+            "n_pixels": 2224,
+            "accuracy": 0.9784172661870504
+          }
+        ],
+        "pooled_metrics": {
+          "accuracy": 0.2280334728033473,
+          "balanced_accuracy_present_classes": 0.36982151683206743,
+          "macro_f1_present_classes": 0.26392631056020144,
+          "classes_present": [
+            0,
+            1,
+            3,
+            5
+          ],
+          "recall": [
+            0.6362781954887218,
+            0.26203083631833046,
+            null,
+            0.014758225540411495,
+            null,
+            0.5662188099808061
+          ],
+          "support": [
+            1064,
+            12842,
+            0,
+            11519,
+            0,
+            4689
+          ],
+          "confusion_matrix": [
+            [
+              677,
+              112,
+              214,
+              0,
+              0,
+              61
+            ],
+            [
+              5038,
+              3365,
+              0,
+              0,
+              2170,
+              2269
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              4447,
+              6897,
+              170,
+              5,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2034,
+              0,
+              0,
+              0,
+              0,
+              2655
+            ]
+          ]
+        }
+      },
+      "train_seconds": 1.2944902000017464,
+      "validation_predict_seconds": 0.6427983999892604
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.0009116790915478055,
+      "validation": {
+        "selection_score": 0.36705264436366025,
+        "per_species": [
+          {
+            "species_class": 0,
+            "mean_roi_accuracy": 0.6419172932330827
+          },
+          {
+            "species_class": 1,
+            "mean_roi_accuracy": 0.2264686022957461
+          },
+          {
+            "species_class": 3,
+            "mean_roi_accuracy": 0.008976366663214993
+          },
+          {
+            "species_class": 5,
+            "mean_roi_accuracy": 0.5908483152625972
+          }
+        ],
+        "per_roi": [
+          {
+            "species_class": 0,
+            "roi_id": 11,
+            "n_pixels": 1064,
+            "accuracy": 0.6419172932330827
+          },
+          {
+            "species_class": 1,
+            "roi_id": 2,
+            "n_pixels": 5437,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 1,
+            "roi_id": 23,
+            "n_pixels": 7405,
+            "accuracy": 0.4529372045914922
+          },
+          {
+            "species_class": 3,
+            "roi_id": 6,
+            "n_pixels": 3069,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 15,
+            "n_pixels": 1028,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 24,
+            "n_pixels": 5555,
+            "accuracy": 0.027182718271827184
+          },
+          {
+            "species_class": 3,
+            "roi_id": 28,
+            "n_pixels": 285,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 34,
+            "n_pixels": 1582,
+            "accuracy": 0.017699115044247787
+          },
+          {
+            "species_class": 5,
+            "roi_id": 17,
+            "n_pixels": 2465,
+            "accuracy": 0.19878296146044624
+          },
+          {
+            "species_class": 5,
+            "roi_id": 18,
+            "n_pixels": 2224,
+            "accuracy": 0.9829136690647482
+          }
+        ],
+        "pooled_metrics": {
+          "accuracy": 0.22886365145779372,
+          "balanced_accuracy_present_classes": 0.3723321213389737,
+          "macro_f1_present_classes": 0.2641541985506115,
+          "classes_present": [
+            0,
+            1,
+            3,
+            5
+          ],
+          "recall": [
+            0.6419172932330827,
+            0.26117427192026166,
+            null,
+            0.015539543363139162,
+            null,
+            0.5706973768394114
+          ],
+          "support": [
+            1064,
+            12842,
+            0,
+            11519,
+            0,
+            4689
+          ],
+          "confusion_matrix": [
+            [
+              683,
+              107,
+              212,
+              0,
+              0,
+              62
+            ],
+            [
+              4959,
+              3354,
+              0,
+              0,
+              2116,
+              2413
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              4309,
+              7026,
+              179,
+              5,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2013,
+              0,
+              0,
+              0,
+              0,
+              2676
+            ]
+          ]
+        }
+      },
+      "train_seconds": 1.3239253000065219,
+      "validation_predict_seconds": 0.6924799999978859
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.0008316754701709283,
+      "validation": {
+        "selection_score": 0.3656411698608204,
+        "per_species": [
+          {
+            "species_class": 0,
+            "mean_roi_accuracy": 0.6409774436090225
+          },
+          {
+            "species_class": 1,
+            "mean_roi_accuracy": 0.22471303173531398
+          },
+          {
+            "species_class": 3,
+            "mean_roi_accuracy": 0.008975547365103134
+          },
+          {
+            "species_class": 5,
+            "mean_roi_accuracy": 0.5878986567338421
+          }
+        ],
+        "per_roi": [
+          {
+            "species_class": 0,
+            "roi_id": 11,
+            "n_pixels": 1064,
+            "accuracy": 0.6409774436090225
+          },
+          {
+            "species_class": 1,
+            "roi_id": 2,
+            "n_pixels": 5437,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 1,
+            "roi_id": 23,
+            "n_pixels": 7405,
+            "accuracy": 0.44942606347062797
+          },
+          {
+            "species_class": 3,
+            "roi_id": 6,
+            "n_pixels": 3069,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 15,
+            "n_pixels": 1028,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 24,
+            "n_pixels": 5555,
+            "accuracy": 0.028442844284428444
+          },
+          {
+            "species_class": 3,
+            "roi_id": 28,
+            "n_pixels": 285,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 34,
+            "n_pixels": 1582,
+            "accuracy": 0.01643489254108723
+          },
+          {
+            "species_class": 5,
+            "roi_id": 17,
+            "n_pixels": 2465,
+            "accuracy": 0.195131845841785
+          },
+          {
+            "species_class": 5,
+            "roi_id": 18,
+            "n_pixels": 2224,
+            "accuracy": 0.9806654676258992
+          }
+        ],
+        "pooled_metrics": {
+          "accuracy": 0.22766819419539086,
+          "balanced_accuracy_present_classes": 0.3709530957976909,
+          "macro_f1_present_classes": 0.2625336006289654,
+          "classes_present": [
+            0,
+            1,
+            3,
+            5
+          ],
+          "recall": [
+            0.6409774436090225,
+            0.25914966516118987,
+            null,
+            0.015973608820210088,
+            null,
+            0.5677116656003413
+          ],
+          "support": [
+            1064,
+            12842,
+            0,
+            11519,
+            0,
+            4689
+          ],
+          "confusion_matrix": [
+            [
+              682,
+              102,
+              216,
+              0,
+              0,
+              64
+            ],
+            [
+              4955,
+              3328,
+              0,
+              0,
+              2085,
+              2474
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              4269,
+              7059,
+              184,
+              7,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2027,
+              0,
+              0,
+              0,
+              0,
+              2662
+            ]
+          ]
+        }
+      },
+      "train_seconds": 1.3762411999923643,
+      "validation_predict_seconds": 0.6838754999917
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.0008002588704952905,
+      "validation": {
+        "selection_score": 0.36597094421066484,
+        "per_species": [
+          {
+            "species_class": 0,
+            "mean_roi_accuracy": 0.6456766917293233
+          },
+          {
+            "species_class": 1,
+            "mean_roi_accuracy": 0.2237002025658339
+          },
+          {
+            "species_class": 3,
+            "mean_roi_accuracy": 0.009426002018659514
+          },
+          {
+            "species_class": 5,
+            "mean_roi_accuracy": 0.5850808805288427
+          }
+        ],
+        "per_roi": [
+          {
+            "species_class": 0,
+            "roi_id": 11,
+            "n_pixels": 1064,
+            "accuracy": 0.6456766917293233
+          },
+          {
+            "species_class": 1,
+            "roi_id": 2,
+            "n_pixels": 5437,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 1,
+            "roi_id": 23,
+            "n_pixels": 7405,
+            "accuracy": 0.4474004051316678
+          },
+          {
+            "species_class": 3,
+            "roi_id": 6,
+            "n_pixels": 3069,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 15,
+            "n_pixels": 1028,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 24,
+            "n_pixels": 5555,
+            "accuracy": 0.030063006300630062
+          },
+          {
+            "species_class": 3,
+            "roi_id": 28,
+            "n_pixels": 285,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 34,
+            "n_pixels": 1582,
+            "accuracy": 0.01706700379266751
+          },
+          {
+            "species_class": 5,
+            "roi_id": 17,
+            "n_pixels": 2465,
+            "accuracy": 0.18904665314401622
+          },
+          {
+            "species_class": 5,
+            "roi_id": 18,
+            "n_pixels": 2224,
+            "accuracy": 0.9811151079136691
+          }
+        ],
+        "pooled_metrics": {
+          "accuracy": 0.22720329414890084,
+          "balanced_accuracy_present_classes": 0.3713065021562833,
+          "macro_f1_present_classes": 0.2626090741831367,
+          "classes_present": [
+            0,
+            1,
+            3,
+            5
+          ],
+          "recall": [
+            0.6456766917293233,
+            0.2579816228001869,
+            null,
+            0.016841739734351942,
+            null,
+            0.564725954361271
+          ],
+          "support": [
+            1064,
+            12842,
+            0,
+            11519,
+            0,
+            4689
+          ],
+          "confusion_matrix": [
+            [
+              687,
+              94,
+              218,
+              0,
+              0,
+              65
+            ],
+            [
+              5097,
+              3313,
+              0,
+              0,
+              1974,
+              2458
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              4100,
+              7219,
+              194,
+              6,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2041,
+              0,
+              0,
+              0,
+              0,
+              2648
+            ]
+          ]
+        }
+      },
+      "train_seconds": 1.307691399997566,
+      "validation_predict_seconds": 0.6176704000099562
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.0006196754464247504,
+      "validation": {
+        "selection_score": 0.36325669017912543,
+        "per_species": [
+          {
+            "species_class": 0,
+            "mean_roi_accuracy": 0.6466165413533834
+          },
+          {
+            "species_class": 1,
+            "mean_roi_accuracy": 0.21850101282916948
+          },
+          {
+            "species_class": 3,
+            "mean_roi_accuracy": 0.010164485475096182
+          },
+          {
+            "species_class": 5,
+            "mean_roi_accuracy": 0.5777447210588527
+          }
+        ],
+        "per_roi": [
+          {
+            "species_class": 0,
+            "roi_id": 11,
+            "n_pixels": 1064,
+            "accuracy": 0.6466165413533834
+          },
+          {
+            "species_class": 1,
+            "roi_id": 2,
+            "n_pixels": 5437,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 1,
+            "roi_id": 23,
+            "n_pixels": 7405,
+            "accuracy": 0.43700202565833896
+          },
+          {
+            "species_class": 3,
+            "roi_id": 6,
+            "n_pixels": 3069,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 15,
+            "n_pixels": 1028,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 24,
+            "n_pixels": 5555,
+            "accuracy": 0.033123312331233126
+          },
+          {
+            "species_class": 3,
+            "roi_id": 28,
+            "n_pixels": 285,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 34,
+            "n_pixels": 1582,
+            "accuracy": 0.017699115044247787
+          },
+          {
+            "species_class": 5,
+            "roi_id": 17,
+            "n_pixels": 2465,
+            "accuracy": 0.18336713995943205
+          },
+          {
+            "species_class": 5,
+            "roi_id": 18,
+            "n_pixels": 2224,
+            "accuracy": 0.9721223021582733
+          }
+        ],
+        "pooled_metrics": {
+          "accuracy": 0.22414823670053796,
+          "balanced_accuracy_present_classes": 0.3686203825247491,
+          "macro_f1_present_classes": 0.2628109077774674,
+          "classes_present": [
+            0,
+            1,
+            3,
+            5
+          ],
+          "recall": [
+            0.6466165413533834,
+            0.25198567201370503,
+            null,
+            0.018404375379807277,
+            null,
+            0.5574749413521006
+          ],
+          "support": [
+            1064,
+            12842,
+            0,
+            11519,
+            0,
+            4689
+          ],
+          "confusion_matrix": [
+            [
+              688,
+              58,
+              253,
+              0,
+              0,
+              65
+            ],
+            [
+              5263,
+              3236,
+              0,
+              0,
+              1959,
+              2384
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              3617,
+              7675,
+              212,
+              14,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2075,
+              0,
+              0,
+              0,
+              0,
+              2614
+            ]
+          ]
+        }
+      },
+      "train_seconds": 1.2620699999970384,
+      "validation_predict_seconds": 0.5956657000060659
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.0005816721933595088,
+      "validation": {
+        "selection_score": 0.3643634650237175,
+        "per_species": [
+          {
+            "species_class": 0,
+            "mean_roi_accuracy": 0.643796992481203
+          },
+          {
+            "species_class": 1,
+            "mean_roi_accuracy": 0.22153950033760972
+          },
+          {
+            "species_class": 3,
+            "mean_roi_accuracy": 0.010074066825140162
+          },
+          {
+            "species_class": 5,
+            "mean_roi_accuracy": 0.5820433004509171
+          }
+        ],
+        "per_roi": [
+          {
+            "species_class": 0,
+            "roi_id": 11,
+            "n_pixels": 1064,
+            "accuracy": 0.643796992481203
+          },
+          {
+            "species_class": 1,
+            "roi_id": 2,
+            "n_pixels": 5437,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 1,
+            "roi_id": 23,
+            "n_pixels": 7405,
+            "accuracy": 0.44307900067521944
+          },
+          {
+            "species_class": 3,
+            "roi_id": 6,
+            "n_pixels": 3069,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 15,
+            "n_pixels": 1028,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 24,
+            "n_pixels": 5555,
+            "accuracy": 0.0333033303330333
+          },
+          {
+            "species_class": 3,
+            "roi_id": 28,
+            "n_pixels": 285,
+            "accuracy": 0.0
+          },
+          {
+            "species_class": 3,
+            "roi_id": 34,
+            "n_pixels": 1582,
+            "accuracy": 0.01706700379266751
+          },
+          {
+            "species_class": 5,
+            "roi_id": 17,
+            "n_pixels": 2465,
+            "accuracy": 0.18701825557809332
+          },
+          {
+            "species_class": 5,
+            "roi_id": 18,
+            "n_pixels": 2224,
+            "accuracy": 0.977068345323741
+          }
+        ],
+        "pooled_metrics": {
+          "accuracy": 0.2262070797635651,
+          "balanced_accuracy_present_classes": 0.3698578525199813,
+          "macro_f1_present_classes": 0.2626152083160176,
+          "classes_present": [
+            0,
+            1,
+            3,
+            5
+          ],
+          "recall": [
+            0.643796992481203,
+            0.25548979909671393,
+            null,
+            0.018404375379807277,
+            null,
+            0.5617402431222009
+          ],
+          "support": [
+            1064,
+            12842,
+            0,
+            11519,
+            0,
+            4689
+          ],
+          "confusion_matrix": [
+            [
+              685,
+              70,
+              241,
+              0,
+              0,
+              68
+            ],
+            [
+              4934,
+              3281,
+              0,
+              0,
+              2068,
+              2559
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3808,
+              7485,
+              212,
+              14,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2055,
+              0,
+              0,
+              0,
+              0,
+              2634
+            ]
+          ]
+        }
+      },
+      "train_seconds": 1.2387298000103328,
+      "validation_predict_seconds": 0.63967559998855
+    }
+  ],
+  "scaling": {
+    "channel_mean": [
+      0.5937529802322388,
+      0.5721952319145203,
+      0.45343658328056335,
+      0.5754370093345642,
+      0.5534698963165283,
+      0.44051381945610046,
+      0.18268197774887085,
+      0.18475814163684845,
+      0.1731727123260498
+    ],
+    "channel_std": [
+      0.21474741399288177,
+      0.2157665491104126,
+      0.19376109540462494,
+      0.10707870870828629,
+      0.10264389216899872,
+      0.0712125301361084,
+      0.06085003539919853,
+      0.06269729137420654,
+      0.05989561602473259
+    ],
+    "class_weights": [
+      1.4175777435302734,
+      0.6630606055259705,
+      1.2985361814498901,
+      1.25502610206604,
+      1.6704658269882202,
+      0.6169472932815552
+    ],
+    "training_counts": [
+      1189,
+      2542,
+      1298,
+      1343,
+      1009,
+      2732
+    ]
+  },
+  "sources_sha256": {
+    "experiments/temporal_context.py": "c90f927c3c0c0dfaeb4f56ec3b7f12b6f2e85bdbd49a32d669aee88e30da8f0c",
+    "experiments/temporal_context_protocol.json": "1d15074347e2def6c018d73ca362a4c2b6d096ce8c0293fd1856cf92f6701b78",
+    "experiments/spatial_context.py": "21989b476c4951f45dcb88d6b93331f574c5204d9cc568a494c7a4c9f6c0e27f",
+    "experiments/spatial_features.py": "3c59c2a12c7261ebd32788a06a760429e0fdbf22826b000bc503705fe25e82a8",
+    "experiments/spatial_context_protocol.json": "c96ac02217f6a51f5ac68039c252b749f5f2e1fc41878e2d6c7171fc7bc37ad7"
+  },
+  "inputs_sha256": {
+    "raw/masks/A.tomentosum_11.pgm": "8ca242182369f434a17e76a6d1d2a584f91af5fa465a3a08c28a9a39915ccb91",
+    "raw/masks/A.tomentosum_5.pgm": "047bdcc2e7890c51cf8c781170242d58c087e9bf87959a8482cb55bc0db12f92",
+    "raw/masks/A.tomentosum_7.pgm": "8ef14447038a9c4579610010c6913180212aca30e3bf99dadf8f26016ae7f1f9",
+    "raw/masks/C.brasiliensis_2.pgm": "3ca4c05805cee0e693fd2afc837bdb382e6530a61387735757b07d9008b24adb",
+    "raw/masks/C.brasiliensis_23.pgm": "f2079504fc1ef73fa83b18afe16f08fb88ce108139e9bcb524cd49b67b0257ec",
+    "raw/masks/C.brasiliensis_29.pgm": "6325c5b5f42fe308800b235c8f4e5460d4d7e42fdd04d441d5c10097073c2b4b",
+    "raw/masks/C.brasiliensis_31.pgm": "f804e2a8c25668e2c1a48527d64363be000eef84920d715e599125162a954b39",
+    "raw/masks/M.guianensis_1.pgm": "7dd6d054b1c163214644d482b06b61a3560da2c705a9a626d461a98129ab9aca",
+    "raw/masks/M.guianensis_21.pgm": "10ac862db09ffe0acff5e06f809652d5ff558ed0d6c6cc7b9604bb1a020f82f9",
+    "raw/masks/M.rubiginosa_15.pgm": "8568523179a39a0e819b95700d3a5e5168637fb8757aedbb21d6a8ed7289dcac",
+    "raw/masks/M.rubiginosa_24.pgm": "00ab8bb74915049066b90839363199f93b0b4a29cb7031370f351c4224b2e0c5",
+    "raw/masks/M.rubiginosa_28.pgm": "42474fc3a89fcd812a4d2b757bfddfcfef0f68e58740f3dd5ae1309601c5c20c",
+    "raw/masks/M.rubiginosa_32.pgm": "c6a4b9ceec22fb42abb534d981c7015a3d0652bb48a1a41cae7032cd063ca0e0",
+    "raw/masks/M.rubiginosa_34.pgm": "8ccd328fc0fd384e08a6548ff3a06616165b3d42b350b02c06b23ea89658958f",
+    "raw/masks/M.rubiginosa_4.pgm": "bfec0434774886fd99b006320f07d02caf5a546740e24c16217b8f3e49b0c1c2",
+    "raw/masks/M.rubiginosa_6.pgm": "2a6861bd5a574ceefd90067f70e6ee050f8c82912f2fcc5327955edefd90fd5b",
+    "raw/masks/P.ramiflora_10.pgm": "dfe1a69c7d24f01753e4553afbb59b12be9494e93b2d77ac3128b14b570df48e",
+    "raw/masks/P.ramiflora_8.pgm": "ff9f3a22c4bf1d9d94c1b9c772784664cd515d24e438443b36fc1b7b51102189",
+    "raw/masks/P.torta_17.pgm": "a49af81d21ecc40141b7dbbcbf34c880cd27de602dd2f28199f0c6bfa2e82ab0",
+    "raw/masks/P.torta_18.pgm": "112ab8de91d3afa140996c1fa1ce5eaec94aef57a60a253f1f3f4158e855b07d",
+    "raw/masks/P.torta_3.pgm": "841299fc3dd0daec033dad0af88dda0e06e7e205e6caaa948a4ef0e5d45a6c4f",
+    "raw/masks/P.torta_9.pgm": "1d4f50962e41d7680d9f5940804ae059827a2e667ef9f8b09fe81c37100050ad",
+    "raw/images/1/2011_242_12.jpg": "d182af06a7daeb70b8aacdcd4653136dca2b76fa3aef04fc0bce49e22f089e2c",
+    "raw/images/1/2011_243_12.jpg": "aa013566749f5b6ef39091e846e6239aaf3cd013346ef0e0cd712ce5df4b09f3",
+    "raw/images/1/2011_244_12.jpg": "aff0518bdc396797646c03e0ef997b303feb5f926c31be5572ff6d5adca80552",
+    "raw/images/1/2011_245_12.jpg": "759c3040e5d89d2a9516e5d703c9c265e870460b3db0fb5ab37a293e77f7e20a",
+    "raw/images/1/2011_246_12.jpg": "c57c166d4275a6418500e96f2ef43bb15f95fb1d5527f6f159b4a894f85d6e2e",
+    "raw/images/1/2011_247_12.jpg": "74eba7fbe2977a46d8d6ab2ab8583737dac5e3a7936c8c0bef86e351845f25c4",
+    "raw/images/1/2011_248_12.jpg": "834ae13fcd0cf26ee215064516bc66c929a4673857612a7ab0c8478dc43406c4",
+    "raw/images/1/2011_249_12.jpg": "1fdb81af1d483dbf1cf46ef0de0a705f68e73675cd1d088c3d149f4a1e7e1da1",
+    "raw/images/1/2011_250_12.jpg": "d84dc6a14d74984cfa05885f7b8c6ea28151509351aa6a37fed34bda82b5b9bb",
+    "raw/images/1/2011_251_12.jpg": "1f32e2958340af30d77128750d8c2e64c3a13b928225dbeadb6a087e6c5db88b",
+    "raw/images/1/2011_252_12.jpg": "4b35530c79b5b853def9994916c8e920a213fd1b46c2f3da979dd893d01ad175",
+    "raw/images/1/2011_253_12.jpg": "f00dd31523784b78243d6981456d15c4c8a9008f54d562af6960e7afcb453b66",
+    "raw/images/1/2011_254_12.jpg": "8a14a8c7c3688323d77c67afaca1b7a529bfd038adba3a34d0c7f38474755fdf",
+    "raw/images/1/2011_255_12.jpg": "5e35048a9a8def791126ab82430c413ce1714235cf705c6833a5c6af76ee5dbd",
+    "raw/images/1/2011_256_12.jpg": "6cb425faa40c5a6c68195925b2e3fb6672b8a21c282992f5bdfa292ff92b36ac",
+    "raw/images/1/2011_257_12.jpg": "bf435392b81206e9e680aa029e1f229d2e3a8666b2522ff7794f3a1136ced6fd",
+    "raw/images/1/2011_258_12.jpg": "3dc2b1945db5e304d82e4ebd7004ffb207ee0912735f9e43f83f96267bf6014f",
+    "raw/images/1/2011_259_12.jpg": "6c126f4d735184a96c5bb57f401af1c9adf26d6a6decfdc4863c2a4b350ade39",
+    "raw/images/1/2011_260_12.jpg": "fd54be10d3d0f751d514a8adb3d128897c7606189d2abeb085bbe0282c84f69f",
+    "raw/images/1/2011_261_12.jpg": "a64c24e5d71466c510f9847697478c4b4d4f986f024f2d09c20e49216097046f",
+    "raw/images/1/2011_262_12.jpg": "1bb6384a923bf7c31b1de811827047c6320919dcfc9c7f970f9882869ebd3271",
+    "raw/images/1/2011_263_12.jpg": "b89791d14abda13fe663d1ed9030a3603408f7e8e13c87cc48f117693f9463f7",
+    "raw/images/1/2011_264_12.jpg": "da1ba79baeddd6d57bd7ae1187dbf5fd00707855ff863aefe89f50f956b38693",
+    "raw/images/1/2011_265_12.jpg": "4a1126548d214117f1db27657025cddc5037136e7c31b91d80cebb91381b6ba8",
+    "raw/images/1/2011_266_12.jpg": "6baa681e766aec7224f28045c38ca5a2de6b1e4dfa664814272234c6e9c471b9",
+    "raw/images/1/2011_267_12.jpg": "79662c524781192642311403aed99241d7b917d83bc15b1f3ca56b344c8d2926",
+    "raw/images/1/2011_268_12.jpg": "27b04b07039b6f05217aa13f9ef5d65a7ce613faa859a5a4a0e396c7f2d15d94",
+    "raw/images/1/2011_269_12.jpg": "d835aa649015edcf7d6a196d34984dbdbf455f0840ca939c1e59d8d07510ca15",
+    "raw/images/1/2011_270_12.jpg": "2ddadbed5e7f79a242ec683e062892433be15e95debe5a59636b4d0c4073ef8d",
+    "raw/images/1/2011_271_12.jpg": "94153dedc25604bd8ac8297540f65af7a1064ae1e1c1d6294c7b3ea1d9c37d09",
+    "raw/images/1/2011_272_12.jpg": "ffdb4066e1ec2138262b422c263c554dddaaa29967a225a0d5c7d0aa14b58baa",
+    "raw/images/1/2011_273_12.jpg": "fa7fffd999fa612beba7a4dab169825d6cf50e4653f9cbd080d9ab87e462a365",
+    "raw/images/1/2011_274_12.jpg": "32995f5a89dee8f566fd566e736f49f01c08dcd5a095a6533329c0ef82709509",
+    "raw/images/1/2011_275_12.jpg": "56d73b2a0f998a514f7ca6082d0cc7b27732381f386bac98df983e121175fcff",
+    "raw/images/1/2011_276_12.jpg": "a6f5693e4aff1a035ba34d0bf80310af78d1bd60559c0ec27ce92b56c1b7475b",
+    "raw/images/1/2011_277_12.jpg": "17de929001d948d0cab2c87f2f1ba97a09b6ec5ddf695d51d171592972b8f41b",
+    "raw/images/1/2011_278_12.jpg": "9dd40a654bdb1cf80420b959a6af94409c79fc84fb0927cab04f7955e36f92f0",
+    "results/pixel_dataset.npz": "e0e36304be3b0cea0da780a4fc99a8fa1c8e9f5079bd24058292ddbb1799980b"
+  },
+  "predictions_sha256": "8bbe68ba116162d2b7d54f61d2939b345328a19244888b601c6fb9815e0bc0e9",
+  "feature_extraction_seconds": 7.345575799990911,
+  "total_seconds": 53.089423199999146,
+  "versions": {
+    "numpy": "2.4.6",
+    "torch": "2.15.0+cpu"
+  },
+  "limitations": [
+    "Exploratory follow-up: historical test outcomes were already observed.",
+    "Classes 2 (M.guianensis) and 4 (P.ramiflora) have no unused validation ROI and are not validated.",
+    "One fixed architecture, seed and 20-epoch schedule; no multi-seed uncertainty estimate.",
+    "The model learns temporal patterns in per-pixel and neighboring RGB statistics; it is not a reproduction of the paper's spatiotemporal vision transformer.",
+    "Different ROIs in the same images do not establish independent plants, sites or years.",
+    "Keep the result even if this CNN performs worse than the frozen spatial GLM."
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "verified_utc": "2026-11-13T19:08:55.899794+00:00",
+  "notebook": "casework/case_notebook.ipynb",
+  "notebook_sha256_lf": "650656109e12c2090506baa76a39977e9b18335de86df8e7abfa7386c2c887fb",
+  "notebook_format": "4.5",
+  "cells": 73,
+  "code_cells": 42,
+  "notebook_errors": 0,
+  "execution": {
+    "status": "passed",
+    "seconds": 774.9426869000017,
+    "code_cells": 42,
+    "notebook_errors": 0,
+    "environment": "Existing core-only .venv; fresh kernel in relocated project; empty recurrence cache",
+    "directory": "C:\\Study\\2026-27\\P2_AI\\phenology_w2\\tmp\\final_submission_review\\relocated_project"
+  },
+  "preservation": {
+    "original_cells": 65,
+    "original_code_cells": 38,
+    "original_sources_outputs_execution_counts_metadata_unchanged": true,
+    "only_original_cell_change": "Added deterministic IDs to 60 cells to normalize notebook format; existing IDs preserved.",
+    "original_reference_notebook_unchanged": true,
+    "historical_result_files_unchanged": true,
+    "reproduced_arrays_exactly": [
+      "pixel_dataset.npz",
+      "predictions.npz",
+      "extension_predictions.npz"
+    ]
+  },
+  "new_experiments": {
+    "spatial_features": "Seven synthetic checks passed; independent spatial footprint and metric verification passed.",
+    "temporal_cnn": "One fixed seed, 20 epochs, 8454 parameters; epoch1 selected on four-species regional validation.",
+    "saved_results_checks": [
+      "checks/check_spatial_results.py",
+      "checks/check_temporal_context.py"
+    ],
+    "default_runtime": "Core environment only; no torch, fitted models, GPU or network required for saved-results verification."
+  },
+  "submission": "Build with checks/build_submission.py after this record; builder checks every ZIP member against its source.",
+  "limits": [
+    "Execution tested on Windows with the existing pinned core environment; no new cross-platform installation test.",
+    "The original test regions have been inspected in earlier experiments; follow-ups remain exploratory.",
+    "Two species have no additional region for validation; CNN uses one seed.",
+    "The complete printed assessment rubric was not available for this final check."
+  ],
+  "packaged_validation": {
+    "status": "passed",
+    "files": 120,
+    "archive": "dist/phenology_submission.zip",
+    "archive_integrity": "Every member byte-compared with its source by checks/build_submission.py; no corrupt members.",
+    "unpacked_checks": [
+      "checks/check_spatial_results.py",
+      "checks/check_temporal_context.py"
+    ],
+    "local_fitted_models_present": false,
+    "optional_pytorch_required": false,
+    "notebook_schema_and_saved_outputs": "Valid nbformat4.5, all42 sequential executed code cells, no saved errors, matching notebook checksum."
+  }
+}

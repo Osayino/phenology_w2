@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "hash_policy": "SHA256; CRLF normalized to LF for .json/.ipynb/.py; raw bytes otherwise",
+  "frozen_utc": "2026-11-13T18:44:20.742737+00:00",
+  "selected_context": "context_25",
+  "test_models": [
+    "raw_rgb",
+    "context_25"
+  ],
+  "models": {
+    "raw_rgb": {
+      "path": "experiments/artifacts/spatial_context/raw_rgb.joblib",
+      "sha256": "48a41c2b381a923d4a766a8f4d40831f80ebbf4eff1ba9bb5b7dfaf3ad0e28b7"
+    },
+    "context_5": {
+      "path": "experiments/artifacts/spatial_context/context_5.joblib",
+      "sha256": "d6efc8e2eec50d5185dacbfcdc01c4f2c245e3051fedcb304790553742250cd0"
+    },
+    "context_25": {
+      "path": "experiments/artifacts/spatial_context/context_25.joblib",
+      "sha256": "1b89acf5955fc8d9a97ef0621bd754d6e982f7e51528a9bbe6e79c545ca09e5f"
+    }
+  },
+  "validation_report_sha256": "ee6250eb8927c61e37923f17984c47a4c3d8212c083e65c6b9de57ef5bb20209",
+  "validation_predictions_sha256": "7168332d44d82f1b1f439f5786a9cf5613469d4a9d138de8f5f4c9d0351e0cc0",
+  "sources_sha256": {
+    "experiments/spatial_context_protocol.json": "c96ac02217f6a51f5ac68039c252b749f5f2e1fc41878e2d6c7171fc7bc37ad7",
+    "experiments/spatial_context.py": "21989b476c4951f45dcb88d6b93331f574c5204d9cc568a494c7a4c9f6c0e27f",
+    "experiments/spatial_features.py": "3c59c2a12c7261ebd32788a06a760429e0fdbf22826b000bc503705fe25e82a8"
+  },
+  "inputs_sha256": {
+    "raw/masks/A.tomentosum_11.pgm": "8ca242182369f434a17e76a6d1d2a584f91af5fa465a3a08c28a9a39915ccb91",
+    "raw/masks/A.tomentosum_5.pgm": "047bdcc2e7890c51cf8c781170242d58c087e9bf87959a8482cb55bc0db12f92",
+    "raw/masks/A.tomentosum_7.pgm": "8ef14447038a9c4579610010c6913180212aca30e3bf99dadf8f26016ae7f1f9",
+    "raw/masks/C.brasiliensis_2.pgm": "3ca4c05805cee0e693fd2afc837bdb382e6530a61387735757b07d9008b24adb",
+    "raw/masks/C.brasiliensis_23.pgm": "f2079504fc1ef73fa83b18afe16f08fb88ce108139e9bcb524cd49b67b0257ec",
+    "raw/masks/C.brasiliensis_29.pgm": "6325c5b5f42fe308800b235c8f4e5460d4d7e42fdd04d441d5c10097073c2b4b",
+    "raw/masks/C.brasiliensis_31.pgm": "f804e2a8c25668e2c1a48527d64363be000eef84920d715e599125162a954b39",
+    "raw/masks/M.guianensis_1.pgm": "7dd6d054b1c163214644d482b06b61a3560da2c705a9a626d461a98129ab9aca",
+    "raw/masks/M.guianensis_21.pgm": "10ac862db09ffe0acff5e06f809652d5ff558ed0d6c6cc7b9604bb1a020f82f9",
+    "raw/masks/M.rubiginosa_15.pgm": "8568523179a39a0e819b95700d3a5e5168637fb8757aedbb21d6a8ed7289dcac",
+    "raw/masks/M.rubiginosa_24.pgm": "00ab8bb74915049066b90839363199f93b0b4a29cb7031370f351c4224b2e0c5",
+    "raw/masks/M.rubiginosa_28.pgm": "42474fc3a89fcd812a4d2b757bfddfcfef0f68e58740f3dd5ae1309601c5c20c",
+    "raw/masks/M.rubiginosa_32.pgm": "c6a4b9ceec22fb42abb534d981c7015a3d0652bb48a1a41cae7032cd063ca0e0",
+    "raw/masks/M.rubiginosa_34.pgm": "8ccd328fc0fd384e08a6548ff3a06616165b3d42b350b02c06b23ea89658958f",
+    "raw/masks/M.rubiginosa_4.pgm": "bfec0434774886fd99b006320f07d02caf5a546740e24c16217b8f3e49b0c1c2",
+    "raw/masks/M.rubiginosa_6.pgm": "2a6861bd5a574ceefd90067f70e6ee050f8c82912f2fcc5327955edefd90fd5b",
+    "raw/masks/P.ramiflora_10.pgm": "dfe1a69c7d24f01753e4553afbb59b12be9494e93b2d77ac3128b14b570df48e",
+    "raw/masks/P.ramiflora_8.pgm": "ff9f3a22c4bf1d9d94c1b9c772784664cd515d24e438443b36fc1b7b51102189",
+    "raw/masks/P.torta_17.pgm": "a49af81d21ecc40141b7dbbcbf34c880cd27de602dd2f28199f0c6bfa2e82ab0",
+    "raw/masks/P.torta_18.pgm": "112ab8de91d3afa140996c1fa1ce5eaec94aef57a60a253f1f3f4158e855b07d",
+    "raw/masks/P.torta_3.pgm": "841299fc3dd0daec033dad0af88dda0e06e7e205e6caaa948a4ef0e5d45a6c4f",
+    "raw/masks/P.torta_9.pgm": "1d4f50962e41d7680d9f5940804ae059827a2e667ef9f8b09fe81c37100050ad",
+    "raw/images/1/2011_242_12.jpg": "d182af06a7daeb70b8aacdcd4653136dca2b76fa3aef04fc0bce49e22f089e2c",
+    "raw/images/1/2011_243_12.jpg": "aa013566749f5b6ef39091e846e6239aaf3cd013346ef0e0cd712ce5df4b09f3",
+    "raw/images/1/2011_244_12.jpg": "aff0518bdc396797646c03e0ef997b303feb5f926c31be5572ff6d5adca80552",
+    "raw/images/1/2011_245_12.jpg": "759c3040e5d89d2a9516e5d703c9c265e870460b3db0fb5ab37a293e77f7e20a",
+    "raw/images/1/2011_246_12.jpg": "c57c166d4275a6418500e96f2ef43bb15f95fb1d5527f6f159b4a894f85d6e2e",
+    "raw/images/1/2011_247_12.jpg": "74eba7fbe2977a46d8d6ab2ab8583737dac5e3a7936c8c0bef86e351845f25c4",
+    "raw/images/1/2011_248_12.jpg": "834ae13fcd0cf26ee215064516bc66c929a4673857612a7ab0c8478dc43406c4",
+    "raw/images/1/2011_249_12.jpg": "1fdb81af1d483dbf1cf46ef0de0a705f68e73675cd1d088c3d149f4a1e7e1da1",
+    "raw/images/1/2011_250_12.jpg": "d84dc6a14d74984cfa05885f7b8c6ea28151509351aa6a37fed34bda82b5b9bb",
+    "raw/images/1/2011_251_12.jpg": "1f32e2958340af30d77128750d8c2e64c3a13b928225dbeadb6a087e6c5db88b",
+    "raw/images/1/2011_252_12.jpg": "4b35530c79b5b853def9994916c8e920a213fd1b46c2f3da979dd893d01ad175",
+    "raw/images/1/2011_253_12.jpg": "f00dd31523784b78243d6981456d15c4c8a9008f54d562af6960e7afcb453b66",
+    "raw/images/1/2011_254_12.jpg": "8a14a8c7c3688323d77c67afaca1b7a529bfd038adba3a34d0c7f38474755fdf",
+    "raw/images/1/2011_255_12.jpg": "5e35048a9a8def791126ab82430c413ce1714235cf705c6833a5c6af76ee5dbd",
+    "raw/images/1/2011_256_12.jpg": "6cb425faa40c5a6c68195925b2e3fb6672b8a21c282992f5bdfa292ff92b36ac",
+    "raw/images/1/2011_257_12.jpg": "bf435392b81206e9e680aa029e1f229d2e3a8666b2522ff7794f3a1136ced6fd",
+    "raw/images/1/2011_258_12.jpg": "3dc2b1945db5e304d82e4ebd7004ffb207ee0912735f9e43f83f96267bf6014f",
+    "raw/images/1/2011_259_12.jpg": "6c126f4d735184a96c5bb57f401af1c9adf26d6a6decfdc4863c2a4b350ade39",
+    "raw/images/1/2011_260_12.jpg": "fd54be10d3d0f751d514a8adb3d128897c7606189d2abeb085bbe0282c84f69f",
+    "raw/images/1/2011_261_12.jpg": "a64c24e5d71466c510f9847697478c4b4d4f986f024f2d09c20e49216097046f",
+    "raw/images/1/2011_262_12.jpg": "1bb6384a923bf7c31b1de811827047c6320919dcfc9c7f970f9882869ebd3271",
+    "raw/images/1/2011_263_12.jpg": "b89791d14abda13fe663d1ed9030a3603408f7e8e13c87cc48f117693f9463f7",
+    "raw/images/1/2011_264_12.jpg": "da1ba79baeddd6d57bd7ae1187dbf5fd00707855ff863aefe89f50f956b38693",
+    "raw/images/1/2011_265_12.jpg": "4a1126548d214117f1db27657025cddc5037136e7c31b91d80cebb91381b6ba8",
+    "raw/images/1/2011_266_12.jpg": "6baa681e766aec7224f28045c38ca5a2de6b1e4dfa664814272234c6e9c471b9",
+    "raw/images/1/2011_267_12.jpg": "79662c524781192642311403aed99241d7b917d83bc15b1f3ca56b344c8d2926",
+    "raw/images/1/2011_268_12.jpg": "27b04b07039b6f05217aa13f9ef5d65a7ce613faa859a5a4a0e396c7f2d15d94",
+    "raw/images/1/2011_269_12.jpg": "d835aa649015edcf7d6a196d34984dbdbf455f0840ca939c1e59d8d07510ca15",
+    "raw/images/1/2011_270_12.jpg": "2ddadbed5e7f79a242ec683e062892433be15e95debe5a59636b4d0c4073ef8d",
+    "raw/images/1/2011_271_12.jpg": "94153dedc25604bd8ac8297540f65af7a1064ae1e1c1d6294c7b3ea1d9c37d09",
+    "raw/images/1/2011_272_12.jpg": "ffdb4066e1ec2138262b422c263c554dddaaa29967a225a0d5c7d0aa14b58baa",
+    "raw/images/1/2011_273_12.jpg": "fa7fffd999fa612beba7a4dab169825d6cf50e4653f9cbd080d9ab87e462a365",
+    "raw/images/1/2011_274_12.jpg": "32995f5a89dee8f566fd566e736f49f01c08dcd5a095a6533329c0ef82709509",
+    "raw/images/1/2011_275_12.jpg": "56d73b2a0f998a514f7ca6082d0cc7b27732381f386bac98df983e121175fcff",
+    "raw/images/1/2011_276_12.jpg": "a6f5693e4aff1a035ba34d0bf80310af78d1bd60559c0ec27ce92b56c1b7475b",
+    "raw/images/1/2011_277_12.jpg": "17de929001d948d0cab2c87f2f1ba97a09b6ec5ddf695d51d171592972b8f41b",
+    "raw/images/1/2011_278_12.jpg": "9dd40a654bdb1cf80420b959a6af94409c79fc84fb0927cab04f7955e36f92f0",
+    "results/pixel_dataset.npz": "e0e36304be3b0cea0da780a4fc99a8fa1c8e9f5079bd24058292ddbb1799980b"
+  }
+}

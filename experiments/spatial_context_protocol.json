@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "name": "Spatial context on previously unused validation regions",
+  "hypothesis": "Adding local RGB means and standard deviations improves prediction in different vegetation regions.",
+  "window_sizes": [5, 25],
+  "features": {
+    "raw_rgb": "111 original RGB values / 255, in channel-major chronological order",
+    "context_5": "raw RGB plus 5x5 local RGB means and population standard deviations; 333 features",
+    "context_25": "raw RGB plus 25x25 local RGB means and population standard deviations; 333 features"
+  },
+  "neighborhood_policy": "Unmasked original photographs; reflect only at photograph boundaries; never use species or ROI membership to alter features.",
+  "model": {
+    "family": "StandardScaler followed by multinomial LogisticRegression",
+    "C": 10.0,
+    "class_weight": "balanced",
+    "solver": "lbfgs",
+    "max_iter": 2000,
+    "random_state": 42,
+    "threads": 2
+  },
+  "training": "Original 10996 fitting indices, excluding centers within Chebyshev distance 24 of retained validation or any test center; 10113 retained. No extra ROIs used for training.",
+  "validation": "Ten ROIs absent from original training and test: exclude centers within Chebyshev distance 24 of any test center; 30114 retained. All ten ROIs remain nonempty.",
+  "validation_classes": [0, 1, 3, 5],
+  "validation_limitation": "Classes 2 and 4 have no additional ROI and are not validated. Different ROIs do not establish independent plants, sites or years.",
+  "separation": {
+    "max_context_radius": 12,
+    "excluded_center_distance_inclusive": 24,
+    "minimum_retained_center_distance": 25,
+    "reason": "Ensure non-overlapping 25x25 photograph footprints across training, validation and test. Apply the same training membership to every model."
+  },
+  "selection": "Choose between context_5 and context_25 by averaging validation ROI accuracy within each species, then equally across the four validated species. A tie chooses context_5. Always retain raw_rgb as the matched comparator, even if it outperforms both context variants.",
+  "test": "Evaluate raw_rgb and the selected context variant once, after saving selection and fitted-model hashes. Retain all 14105 original test pixels; do not refit after selection or test evaluation.",
+  "reporting": "Report validation results for all three candidates and test accuracy, balanced accuracy, macro F1, confusion matrices, per-species recall, feature extraction time and fit time for the two frozen models.",
+  "interpretation": [
+    "Exploratory follow-up: historical test outcomes were already observed.",
+    "Compare spatial features against this experiment's buffered raw model; its training membership differs from the historical 38.91% GLM.",
+    "A single deterministic GLM fit per representation; no three-seed uncertainty claim.",
+    "Retain results even if context worsens performance; no test-driven changes to this shortlist.",
+    "Notebook, original result files, reference materials and submission archive remain unchanged."
+  ]
+}

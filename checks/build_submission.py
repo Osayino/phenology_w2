@@ -16,7 +16,8 @@ def submission_files(root):
         "README.md", "START-HERE.txt", "requirements.txt", "requirements-lock.txt",
         "requirements-experiments.txt", "requirements-experiments-lock.txt",
         "casework/case_notebook.ipynb", "casework/phenology_data.py", "casework/knn_utils.py",
-        "experiments/protocol.json",
+        "experiments/protocol.json", "experiments/spatial_context_protocol.json",
+        "experiments/temporal_context_protocol.json",
     )]
     paths.extend(sorted((root / "checks").glob("*.py")))
     paths.extend(sorted((root / "experiments").glob("*.py")))
@@ -30,6 +31,13 @@ def submission_files(root):
         "pixel_dataset.npz", "pixel_examples.png", "predictions.npz", "verification.json",
         "model_comparison.json", "model_comparison.png", "model_comparison_predictions.npz",
         "model_comparison_selection.json", "model_comparison_validation.json",
+        "spatial_context_comparison.png", "spatial_context_predictions.npz",
+        "spatial_context_results.json", "spatial_context_selection.json",
+        "spatial_context_validation.json", "spatial_context_validation_predictions.npz",
+        "temporal_context_predictions.npz", "temporal_context_results.json",
+        "temporal_context_selection.json", "temporal_context_validation.json",
+        "temporal_context_validation_predictions.npz", "temporal_context_comparison.png",
+        "final_submission_verification.json",
     ))
     assert len(paths) == len(set(paths)) and all(path.is_file() for path in paths)
     return paths

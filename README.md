@@ -4,6 +4,13 @@ Working project: `C:\Study\2026-27\P2_AI\phenology_w2`.
 
 The assignment compares K-nearest-neighbour classification of plant species using pixel colour time series and recurrence plot images.
 
+The final submission also contains a spatial-context comparison and a small
+temporal CNN trained on the original RGB histories and neighboring color
+statistics. The main notebook verifies and displays their saved results using
+the core environment. Its default Run All does not train the CNN or require
+PyTorch, a GPU, fitted weights, or network access. The measured final execution
+check is recorded in `results/final_submission_verification.json`.
+
 ## Start here
 
 1. Extract the submission ZIP completely and open its project folder in VS Code. For a fresh environment, follow [START-HERE.txt](START-HERE.txt), which provides Windows and macOS/Linux setup commands.
@@ -147,6 +154,57 @@ RGB intensities had the highest observed test accuracy: **36.39%**, compared wit
 the random forest's **34.12%** (+2.27 percentage points). Its balanced accuracy was
 **38.91%** and macro F1 **0.3146**. The notebook reports every model, including the
 weaker outcomes; its 100% validation accuracy did not carry over to new regions.
+
+## Final spatial and temporal experiments
+
+I tested whether neighboring colors help predictions in different image regions.
+The spatial comparison keeps the same balanced logistic GLM and adds local RGB
+means and standard deviations to each pixel's 37-day RGB history. The 5x5 and
+25x25 candidates were fixed before selection; validation selected 25x25.
+
+The comparison uses 10,113 fitting pixels after applying a shared spatial buffer,
+30,114 validation pixels from ten previously unused ROIs, and all 14,105 original
+test pixels. Neighborhood footprints do not overlap between partitions. Only
+four species have extra regions for validation; M. guianensis and P. ramiflora
+are absent from that validation score. No extra ROI is added to training.
+
+I also trained one small temporal CNN on the same 333 context features, reshaped
+as nine channels across 37 days. It has 8,454 parameters. Its architecture, seed
+and 20-epoch schedule were fixed in advance; the regional validation score
+selected epoch 1. Training loss continued to decrease after that while validation
+performance declined. Feature extraction, fitting and selection took about
+53 seconds on the tested CPU setup; test extraction and inference took about
+7 seconds. This model does not reproduce the paper's vision transformer.
+
+| Matched model | Test accuracy | Balanced accuracy | Macro F1 |
+|---|---:|---:|---:|
+| Buffered raw-RGB GLM | 37.05% | 40.19% | 0.3193 |
+| GLM with 25x25 context | 46.23% | 43.52% | 0.3713 |
+| Temporal CNN on context statistics | 43.28% | 46.10% | 0.3534 |
+
+The context GLM has the highest ordinary accuracy and macro F1 in this matched
+comparison. The CNN has the highest balanced accuracy. It recovers 52.58% of
+P. ramiflora test pixels, but P. torta recall falls to 12.19%. M. rubiginosa
+recall remains zero for all three models. These are exploratory follow-ups on
+test regions already inspected earlier; one fixed CNN seed does not establish
+run-to-run uncertainty. The buffered raw model is the matched reference because
+its fitting membership differs from the earlier GLM experiment.
+
+The final notebook sections verify the saved predictions with the core-only
+`checks/check_spatial_results.py` and `checks/check_temporal_context.py`. Their
+default path does not load trained models. The frozen protocols, validation
+histories, selected checkpoints' hashes, predictions and figures are included
+in the ZIP; large model artifacts remain local. See START-HERE.txt for optional
+reproduction commands. Earlier code, stored outputs and original reference
+notebook content are retained. Notebook format metadata was normalized to
+version 4.5 with valid cell IDs so standard Jupyter validation succeeds.
+
+Final execution check: all **42 code cells** passed in a fresh core-only kernel
+from a relocated project with no recurrence cache, in **775 seconds** (about
+13 minutes). Original pixel arrays, K-NN predictions and neighbor indices, and
+random-forest predictions reproduced exactly. Only the newly appended cells'
+outputs were copied back; the earlier saved outputs remain intact. The final
+verification record is `results/final_submission_verification.json`.
 
 ## Portability verification — 13 November 2026
 

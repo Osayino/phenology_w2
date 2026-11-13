@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "name": "Fixed temporal CNN on 25x25 spatial RGB statistics",
+  "features": "context_25 reshaped from 333 channel-major features to 9 channels by 37 chronological days: raw RGB, local mean RGB, local population standard deviation RGB",
+  "window_size": 25,
+  "model": {
+    "seed": 42,
+    "threads": 2,
+    "epochs": 20,
+    "batch_size": 256,
+    "channels": [9, 32, 64],
+    "kernel_sizes": [5, 3],
+    "padding": [2, 1],
+    "activation": "GELU",
+    "dropout": 0.2,
+    "pooling": "concatenate temporal global mean and maximum",
+    "head": "Linear(128, 6)",
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.01,
+    "loss": "cross entropy weighted by training n / (6 * class count)",
+    "normalization": "per-channel mean and population std over training samples and time only; std <= 1e-8 replaced with 1",
+    "augmentation": "none"
+  },
+  "geometry": "Identical to the fixed spatial experiment: 10113 buffered training pixels, 30114 unused-ROI validation pixels, and all 14105 original test pixels. Cross-partition 25x25 contexts do not overlap.",
+  "selection": "After each of 20 fixed epochs, average validation ROI accuracy within each of four represented species, then equally across those species. Save the highest score; the earliest epoch wins a tie. Do not refit after selection.",
+  "test": "Evaluate only the frozen selected checkpoint once on the original test set. Compare separately with the already saved matched spatial GLM baselines.",
+  "limitations": [
+    "Exploratory follow-up: historical test outcomes were already observed.",
+    "Classes 2 (M.guianensis) and 4 (P.ramiflora) have no unused validation ROI and are not validated.",
+    "One fixed architecture, seed and 20-epoch schedule; no multi-seed uncertainty estimate.",
+    "The model learns temporal patterns in per-pixel and neighboring RGB statistics; it is not a reproduction of the paper's spatiotemporal vision transformer.",
+    "Different ROIs in the same images do not establish independent plants, sites or years.",
+    "Keep the result even if this CNN performs worse than the frozen spatial GLM."
+  ]
+}
