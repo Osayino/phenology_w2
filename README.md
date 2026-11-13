@@ -25,6 +25,7 @@ This table describes the full working folder; the Submission section lists the Z
 | `results/` | Saved pixel dataset, predictions, metrics, verification and figures |
 | `cache/` | Regenerable full recurrence arrays (about 1.53 GiB; excluded from Git) |
 | `checks/` | Executable checks for data, nearest neighbours and experiment results |
+| `experiments/` | Optional model comparison, validation selection, verification and plotting |
 | `raw/images/1/` | Supplied photographs, kept unchanged |
 | `raw/masks/` | Supplied region masks, kept unchanged |
 | `reference/` | Original notebook, specification and slides |
@@ -32,6 +33,7 @@ This table describes the full working folder; the Submission section lists the Z
 | `.venv/` | Local Python environment; do not submit it |
 | `requirements.txt` | Direct Python dependencies |
 | `requirements-lock.txt` | Exact dependency versions used for this environment |
+| `requirements-experiments-lock.txt` | Pinned optional environment, including PyTorch, torchvision and XGBoost |
 | `setup-check.json` | Historical setup and data-loading checks; current experiment checks are in `results/verification.json` |
 | `COURSE-WORKFLOW.md` | Learning plan and agreed course organisation |
 
@@ -97,9 +99,67 @@ The saved extension outputs are `results/extension_results.json`,
 These separate files preserve the required K-NN comparison. The completed 32-cell
 run and scores documented above are the historical 11 November baseline run.
 
+## Broader optional model comparison
+
+The notebook's final comparison covers six additional approaches: SVM, a
+multinomial logistic GLM, XGBoost, Bayesian classification (Gaussian naive Bayes
+and a tree-augmented Bayesian network), pretrained CNN transfer features, and
+pretrained vision-transformer transfer features. It includes the two original
+K-NN models and the earlier random forest for reference. The image models use
+frozen pretrained features with small classifiers; they are not trained from
+scratch on these pixels.
+
+Each new model's configuration is selected using the existing validation split,
+then recorded before evaluating the same 14,105 test pixels. The comparison is
+exploratory: earlier test outcomes were already known, and validation pixels
+share training regions. The table reports ordinary accuracy, balanced accuracy
+(macro recall), and macro F1 so class imbalance is visible.
+
+By default, the notebook verifies and displays the saved comparison. This needs
+only the core environment; PyTorch and XGBoost are not required to view it or
+check its saved predictions. To reproduce the optional training, first run the
+core notebook to prepare its dataset and recurrence cache, then create a separate
+Python 3.11 environment from the project root:
+
+```powershell
+python -m venv .venv-experiments
+.\.venv-experiments\Scripts\python.exe -m pip install -r requirements-experiments-lock.txt
+.\.venv-experiments\Scripts\python.exe -B experiments/run_comparison.py --fit
+```
+
+On macOS/Linux, use `.venv-experiments/bin/python` for the last two commands;
+these platforms have not been tested. With that environment activated, the run
+command is `python -B experiments/run_comparison.py --fit`. Budget roughly one
+additional CPU hour, depending on the computer, and additional disk space for
+the larger environment and feature caches. Pretrained weights need internet
+access on their first download. The runner saves new comparison files separately
+from the original K-NN and random-forest results. Reopen or rerun the final
+notebook cells to display newly generated comparison results.
+
+The durable comparison files are `results/model_comparison.json`,
+`model_comparison_predictions.npz`, `model_comparison_selection.json`,
+`model_comparison_validation.json` and `model_comparison.png`. Local fitted
+models and embedding caches under `experiments/artifacts/` can be regenerated
+with `--fit`; they are not needed to inspect or verify the saved results.
+
+In the fixed 13 November comparison, multinomial logistic regression on original
+RGB intensities had the highest observed test accuracy: **36.39%**, compared with
+the random forest's **34.12%** (+2.27 percentage points). Its balanced accuracy was
+**38.91%** and macro F1 **0.3146**. The notebook reports every model, including the
+weaker outcomes; its 100% validation accuracy did not carry over to new regions.
+
 ## Portability verification — 13 November 2026
 
-All 35 code cells completed in order in a fresh kernel in a relocated project,
+The expanded notebook's **38 code cells** also completed in order in a fresh
+core-only kernel in a relocated project in **708 seconds**
+(about 11.8 minutes). It started without core results or
+recurrence caches. The original predictions were reproduced exactly; the saved
+advanced comparison was independently checked and displayed without PyTorch,
+XGBoost, downloaded weights or fitted-model artifacts. The heavier training
+was completed separately in the optional environment. All 60 original notebook
+cells, including their outputs and metadata, remain intact in the main notebook.
+
+Before the broader comparison was added, all 35 code cells completed in order in a fresh kernel in a relocated project,
 starting without results or recurrence caches. The run took 859 seconds (about
 14 minutes). Every original K-NN prediction, neighbour index and metric matched
 the saved baseline. The working notebook retains its original baseline outputs;
@@ -140,6 +200,10 @@ Run the checks from the project root:
 
 The saved-data and result checks require a completed notebook run. The first three use
 small independent examples and do not regenerate the full experiment.
+`checks/verify_results.py` also checks the broader comparison when its result
+files are present. To verify only that comparison, run
+`.\.venv\Scripts\python.exe -B experiments/verify_comparison.py`; this does not
+load fitted models, require the optional environment, or change result files.
 
 ## Submission
 
@@ -157,6 +221,13 @@ The ZIP omits `.venv`, caches, temporary files and unrelated data. Internet acce
 is needed for dependency installation, not to download the included assignment
 data. Allow at least 4 GB of free disk space and around 20 minutes for a full run;
 runtime depends on the computer and whether a usable cache already exists.
+The optional comparison scripts, dependency specifications and saved comparison
+are included. Refitting the additional models is a separate, longer run described
+above; the notebook displays their saved results by default.
+
+After verifying any later notebook changes, rebuild the ZIP from the project root
+with `.\.venv\Scripts\python.exe -B checks/build_submission.py`. The builder uses
+an explicit file list and checks every archived file against its source.
 
 ## Recreate the Python environment if needed
 
@@ -170,4 +241,4 @@ python -m venv .venv
 
 Then select the new `.venv` in the notebook. Recreate environments after relocating a project rather than assuming an old `.venv` can be copied safely.
 
-The earlier project in `C:\Users\User\Documents\Codex\2026-11-04\t\outputs\phenology-vscode` is retained as a backup. Continue coursework in this `C:\Study` project to avoid diverging copies. Git has not been initialised.
+The earlier project in `C:\Users\User\Documents\Codex\2026-11-04\t\outputs\phenology-vscode` is retained as a backup. Continue coursework in this `C:\Study` project to avoid diverging copies. This project now has a Git repository; local environments, recurrence caches and optional fitted-model artifacts are ignored.

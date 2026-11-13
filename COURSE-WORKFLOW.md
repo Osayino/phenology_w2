@@ -6,7 +6,7 @@ exercises and has completed a fresh ordered run. Full pixel datasets, a shared s
 matched classifier results, figures and verification are saved. The original ROI-level
 work is preserved. The reflection needs student review, and full-rubric and submission
 checks remain pending. See README.md and results/verification.json for current evidence.
-No Git repository or remote publication has been created.
+The project now has a Git repository; the student has also pushed it to GitHub.
 
 Portability update (13 November 2026): the notebook now finds its project folder
 when launched from the root or `casework`, with a `PROJECT_DIR` override for other
@@ -19,6 +19,16 @@ The validation-selected random forest achieved 34.12% test accuracy versus
 A clean environment also passed the four numerical/data checks. The 11 November
 status above records the original 32-cell K-NN experiment. The runnable hand-in
 archive is `dist/phenology_submission.zip`; its setup instructions are in START-HERE.txt.
+
+Optional comparison update (13 November 2026): a further section compares SVM,
+a multinomial logistic GLM, XGBoost, Bayesian classifiers, pretrained CNN transfer
+features and pretrained vision-transformer transfer features on the original
+split. Its default notebook path displays and verifies saved results using only
+the core environment. Refitting is an explicit extra run after the core notebook:
+`python -B experiments/run_comparison.py --fit`, in the separate environment from
+`requirements-experiments-lock.txt`. See README.md for setup, pretrained-weight
+downloads and the approximate additional CPU runtime. The 35-cell portability
+check above predates this broader comparison.
 
 Default study root: `C:\Study`.
 
@@ -84,7 +94,10 @@ Before the first snapshot, inspect which files Git would include:
 - Exclude `.venv`, caches, notebook checkpoints, bulk datasets, and large generated files. Record how to obtain or regenerate excluded files.
 - Decide explicitly whether supplied course materials belong in the history. Keep access and submission rules with the course information.
 
-The current phenology `.gitignore` excludes `.venv`, `__pycache__`, and `.ipynb_checkpoints`. It does not yet exclude `raw`; review this before initializing and staging the project.
+The current phenology `.gitignore` excludes both local environments, Python and
+notebook caches, recurrence caches, temporary files and `experiments/artifacts/`.
+It does not exclude `raw`; retain an explicit decision about supplied-data inclusion
+when reviewing future changes for publication.
 
 Start with four concepts: status, diff, staging, and commit. A diff shows what changed; staging selects changes for a snapshot; a commit records that snapshot with a message. Learn history and recovery on a harmless practice change. Add branches and collaboration when an actual task needs them.
 
@@ -172,6 +185,6 @@ Then inspect validation versus test performance and review the draft reflection.
 Compare the finished work with the full paper rubric when available and confirm the
 submission format. Keep `casework/case_notebook.ipynb` as the single working notebook.
 
-The earlier setup/teaching sequence above is retained as a learning plan. A new Git
-checkpoint remains a separate future task; cache and temporary directories are now
-ignored, but raw-data inclusion still requires review before initializing a repository.
+The earlier setup/teaching sequence above is retained as a learning plan. Review
+the current changes before the next Git checkpoint, including the explanations
+and limitations of the optional model comparison.

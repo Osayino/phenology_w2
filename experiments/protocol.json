@@ -1,0 +1,45 @@
+{
+  "study": "Additional model-family comparison requested after the original assignment was completed",
+  "started_utc": "2026-11-13T12:23:57Z",
+  "planning_window_hours": 2,
+  "baseline_commit": "3542acc",
+  "dataset_sha256": "e0e36304be3b0cea0da780a4fc99a8fa1c8e9f5079bd24058292ddbb1799980b",
+  "fixed_split": {
+    "train": 10996,
+    "validation": 2749,
+    "test": 14105,
+    "seed": 42
+  },
+  "selection": "Choose a configuration within each declared model family using validation accuracy; report macro F1 too. Declare family/configuration before final evaluation. Evaluate frozen family winners together on the separate test ROIs.",
+  "families": [
+    "SVM",
+    "multinomial logistic regression (GLM)",
+    "XGBoost",
+    "Gaussian naive Bayes reference",
+    "tree-augmented naive Bayes (Bayesian network)",
+    "frozen pretrained CNN + classifier",
+    "frozen pretrained vision transformer + classifier (runtime permitting)"
+  ],
+  "representations": [
+    "111 RGBcc values",
+    "111 original RGB intensity values for tabular comparisons",
+    "nine predefined RGBcc summary features for Bayesian comparisons",
+    "RGB recurrence images for pretrained image models"
+  ],
+  "constraints": [
+    "Preserve the required K-NN experiment and original random-forest extension",
+    "Fit preprocessing on training rows only",
+    "Use the same fitting samples and test membership as the baselines",
+    "No held-out labels or scores during candidate tuning",
+    "Do not add or retune candidates after inspecting this comparison test table",
+    "Report both ordinary accuracy and balanced accuracy (macro recall)",
+    "Treat results as exploratory: previous baseline test outcomes were already observed and validation shares training ROIs",
+    "Keep downloaded weights and fitted models out of Git and the small assignment archive"
+  ],
+  "literature_context": {
+    "url": "https://arxiv.org/abs/2605.00296",
+    "paper_metric": "balanced accuracy",
+    "reported_itirapina_value": 0.6151,
+    "directly_comparable": false
+  }
+}

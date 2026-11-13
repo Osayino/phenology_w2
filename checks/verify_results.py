@@ -135,6 +135,17 @@ with np.load(ROOT / 'results/pixel_dataset.npz', allow_pickle=False) as data, \
 for name in ('pixel_examples.png', 'comparison.png', 'confusion_matrices.png'):
     assert (ROOT / 'results' / name).stat().st_size > 1000
 
+comparison_summary = {'status': 'not_present'}
+comparison_paths = [ROOT / 'results' / name for name in
+                    ('model_comparison.json', 'model_comparison_predictions.npz',
+                     'model_comparison_selection.json')]
+if any(path.exists() for path in comparison_paths):
+    assert all(path.is_file() for path in comparison_paths), 'Incomplete optional-comparison artifacts'
+    # This verifier reads predictions and the selection record, not fitted models.
+    sys.path.insert(0, str(ROOT))
+    from experiments.verify_comparison import verify_results as verify_model_comparison
+    comparison_summary = verify_model_comparison(ROOT)
+
 summary = {
     'status': 'passed', 'verification_date': date.today().isoformat(),
     'command': r'.\.venv\Scripts\python.exe checks\verify_results.py',
@@ -150,6 +161,7 @@ summary = {
     'recurrence_file_sha256': cache_hashes,
     'numpy_version': np.__version__, 'sklearn_version': sklearn.__version__,
     'optional_extension': extension_summary,
+    'optional_model_comparison': comparison_summary,
     'pending': ['Full rubric review', 'Student review of explanations and reflection'],
 }
 (ROOT / 'results/verification.json').write_text(json.dumps(summary, indent=2) + '\n', encoding='utf-8')

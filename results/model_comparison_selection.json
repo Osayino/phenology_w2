@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "frozen_utc": "2026-11-13T13:02:17.016307+00:00",
+  "dataset_sha256": "e0e36304be3b0cea0da780a4fc99a8fa1c8e9f5079bd24058292ddbb1799980b",
+  "dataset_content_sha256": "98a595845391fd5be3bd4d65d29a32d5fc25c8d37946568222542d989b10d41b",
+  "protocol_sha256": "96918ec8e33235351ce1c4ba3a4d97ce55ce6eda62ed8361381bea7a4b847f66",
+  "selection_rule": "Highest validation accuracy within each declared family; first configuration breaks ties",
+  "models": [
+    {
+      "name": "SVM (RBF)",
+      "family": "svm",
+      "prediction_key": "svm",
+      "input_kind": "rgb_intensity",
+      "representation": "RGB intensities (111)",
+      "validation_accuracy": 0.9949072389959985,
+      "validation_macro_f1": 0.9945197903689446,
+      "configuration": {
+        "memory": null,
+        "steps": "[('standardscaler', StandardScaler()), ('svc', SVC(C=10.0, class_weight='balanced'))]",
+        "transform_input": null,
+        "verbose": false,
+        "standardscaler": "StandardScaler()",
+        "svc": "SVC(C=10.0, class_weight='balanced')",
+        "standardscaler__copy": true,
+        "standardscaler__with_mean": true,
+        "standardscaler__with_std": true,
+        "svc__C": 10.0,
+        "svc__break_ties": false,
+        "svc__cache_size": 200,
+        "svc__class_weight": "balanced",
+        "svc__coef0": 0.0,
+        "svc__decision_function_shape": "ovr",
+        "svc__degree": 3,
+        "svc__gamma": "scale",
+        "svc__kernel": "rbf",
+        "svc__max_iter": -1,
+        "svc__probability": "deprecated",
+        "svc__random_state": null,
+        "svc__shrinking": true,
+        "svc__tol": 0.001,
+        "svc__verbose": false
+      },
+      "model_path": "experiments/artifacts/tabular_svm_selected.joblib",
+      "model_sha256": "74feb9f070909fab5c69e3ab62978d2beb285b3b743c767f72a9cd33220dc77e",
+      "validation_report": "experiments/artifacts/tabular_validation.json",
+      "validation_report_sha256": "9cef6fc49a735ca0881f7e1bb0ff7627a93a46d3547b6e52908c057550d764df"
+    },
+    {
+      "name": "Multinomial logistic GLM",
+      "family": "glm",
+      "prediction_key": "glm",
+      "input_kind": "rgb_intensity",
+      "representation": "RGB intensities (111)",
+      "validation_accuracy": 1.0,
+      "validation_macro_f1": 1.0,
+      "configuration": {
+        "memory": null,
+        "steps": "[('standardscaler', StandardScaler()), ('logisticregression', LogisticRegression(C=10.0, class_weight='balanced', max_iter=2000,\n                   random_state=42))]",
+        "transform_input": null,
+        "verbose": false,
+        "standardscaler": "StandardScaler()",
+        "logisticregression": "LogisticRegression(C=10.0, class_weight='balanced', max_iter=2000,\n                   random_state=42)",
+        "standardscaler__copy": true,
+        "standardscaler__with_mean": true,
+        "standardscaler__with_std": true,
+        "logisticregression__C": 10.0,
+        "logisticregression__class_weight": "balanced",
+        "logisticregression__dual": false,
+        "logisticregression__fit_intercept": true,
+        "logisticregression__intercept_scaling": 1,
+        "logisticregression__l1_ratio": 0.0,
+        "logisticregression__max_iter": 2000,
+        "logisticregression__n_jobs": null,
+        "logisticregression__penalty": "deprecated",
+        "logisticregression__random_state": 42,
+        "logisticregression__solver": "lbfgs",
+        "logisticregression__tol": 0.0001,
+        "logisticregression__verbose": 0,
+        "logisticregression__warm_start": false
+      },
+      "model_path": "experiments/artifacts/tabular_glm_selected.joblib",
+      "model_sha256": "b5f7509a30329ba7a1fd4efe04a3c0fb4cf13a8e88ab07c133799b72e1f3956d",
+      "validation_report": "experiments/artifacts/tabular_validation.json",
+      "validation_report_sha256": "9cef6fc49a735ca0881f7e1bb0ff7627a93a46d3547b6e52908c057550d764df"
+    },
+    {
+      "name": "XGBoost",
+      "family": "xgboost",
+      "prediction_key": "xgboost",
+      "input_kind": "rgbcc",
+      "representation": "RGBcc (111)",
+      "validation_accuracy": 0.9974536194979993,
+      "validation_macro_f1": 0.9974820673802448,
+      "configuration": {
+        "objective": "multi:softprob",
+        "base_score": null,
+        "booster": null,
+        "callbacks": null,
+        "colsample_bylevel": null,
+        "colsample_bynode": null,
+        "colsample_bytree": 0.8,
+        "device": null,
+        "early_stopping_rounds": null,
+        "enable_categorical": false,
+        "eval_metric": "mlogloss",
+        "feature_types": null,
+        "feature_weights": null,
+        "gamma": null,
+        "grow_policy": null,
+        "importance_type": null,
+        "interaction_constraints": null,
+        "learning_rate": 0.05,
+        "max_bin": null,
+        "max_cat_threshold": null,
+        "max_cat_to_onehot": null,
+        "max_delta_step": null,
+        "max_depth": 3,
+        "max_leaves": null,
+        "min_child_weight": 5,
+        "missing": "nan",
+        "monotone_constraints": null,
+        "multi_strategy": null,
+        "n_estimators": 300,
+        "n_jobs": 2,
+        "num_parallel_tree": null,
+        "random_state": 42,
+        "reg_alpha": null,
+        "reg_lambda": 5,
+        "sampling_method": null,
+        "scale_pos_weight": null,
+        "subsample": 0.8,
+        "tree_method": "hist",
+        "validate_parameters": null,
+        "verbosity": null,
+        "num_class": 6
+      },
+      "model_path": "experiments/artifacts/xgboost_selected.joblib",
+      "model_sha256": "b6a5a4dd2ba971e3a9485b77b049721d033b046e34ca84254e35b30031db3c30",
+      "validation_report": "experiments/artifacts/xgboost_validation.json",
+      "validation_report_sha256": "0ee44b70fae0dadac17d111eb4997a3bf9e52709a4c7de00b13ddb281b95c45e"
+    },
+    {
+      "name": "Gaussian naive Bayes",
+      "family": "gaussian_nb",
+      "prediction_key": "gaussian_nb",
+      "input_kind": "bayesian_summary",
+      "representation": "RGBcc summaries (9)",
+      "validation_accuracy": 0.8053837759185158,
+      "validation_macro_f1": 0.77749413419446,
+      "configuration": {
+        "priors": null,
+        "var_smoothing": 1e-09
+      },
+      "model_path": "experiments/artifacts/bayesian_gaussian_summary.joblib",
+      "model_sha256": "f4fdc8da21ffb4c9b5a90cadb25f221f63400551836cd55ead99dc0fd456e5a9",
+      "validation_report": "experiments/artifacts/bayesian_validation.json",
+      "validation_report_sha256": "9553179b744aee62fc6b45e2612d43709ba62402be938f47067ced2fb5284158"
+    },
+    {
+      "name": "Bayesian network (TAN)",
+      "family": "tan",
+      "prediction_key": "tan",
+      "input_kind": "bayesian_summary",
+      "representation": "Binned RGBcc summaries (9)",
+      "validation_accuracy": 0.8814114223353947,
+      "validation_macro_f1": 0.8700693587166666,
+      "configuration": {
+        "n_bins": 3,
+        "alpha": 1.0,
+        "class_prior": "smoothed empirical training proportions",
+        "feature_tree_root": "red_mean"
+      },
+      "model_path": "experiments/artifacts/bayesian_tan_3.json",
+      "model_sha256": "9f384e2595c2a0476398d890f75d17c7577273718838b20f729b98f59d28cbdf",
+      "validation_report": "experiments/artifacts/bayesian_validation.json",
+      "validation_report_sha256": "9553179b744aee62fc6b45e2612d43709ba62402be938f47067ced2fb5284158"
+    },
+    {
+      "name": "CNN transfer (MobileNet)",
+      "family": "cnn_transfer",
+      "prediction_key": "cnn_transfer",
+      "input_kind": "mobilenet_v3_small",
+      "representation": "RP pretrained features (576)",
+      "validation_accuracy": 0.8028373954165151,
+      "validation_macro_f1": 0.7881337814994996,
+      "configuration": {
+        "backbone": "mobilenet_v3_small",
+        "head_C": 0.1,
+        "head": "training-only StandardScaler + balanced multinomial logistic regression",
+        "backbone_recipe": {
+          "model": "mobilenet_v3_small",
+          "weights": "MobileNet_V3_Small_Weights.IMAGENET1K_V1",
+          "weights_url": "https://download.pytorch.org/models/mobilenet_v3_small-047dcff4.pth",
+          "feature_width": 576,
+          "preprocessing": {
+            "resize": [
+              224,
+              224
+            ],
+            "interpolation": "bilinear",
+            "antialias": true,
+            "crop": null,
+            "augmentation": null,
+            "mean": [
+              0.485,
+              0.456,
+              0.406
+            ],
+            "std": [
+              0.229,
+              0.224,
+              0.225
+            ],
+            "adaptation": "Resize the entire RP to preserve both temporal boundaries; no ImageNet centre crop."
+          },
+          "torch_version": "2.15.0+cpu",
+          "torchvision_version": "0.29.2+cpu",
+          "device": "cpu",
+          "threads": 2,
+          "source": {
+            "cache_key": "78caa961ce11bca912e0b0d3cca9b5fa529785289625eeed421127af4052fd82",
+            "file_sha256": "fededa11b3a23e2fe2febe878a041412dee91469213f1c84f16b314016e34dac",
+            "rows": 13745
+          },
+          "split": "trainval",
+          "script_sha256": "102bf113a99c1b8bdb3eb83541a645e2362989f50b8a93c80d4b8ae303c27b94"
+        }
+      },
+      "model_path": "experiments/artifacts/image_mobilenet_v3_small_selected_head.joblib",
+      "model_sha256": "f3c93a972aff31cfa9b3fe958310d2f6602c86bacc801e54a21ab7b4b29a6b46",
+      "validation_report": "experiments/artifacts/image_mobilenet_v3_small_validation.json",
+      "validation_report_sha256": "fc8860d42d2c4c8b38c0f1b9c9aa91139a6d436fbdcdc36754d5d80a662b59fb"
+    },
+    {
+      "name": "ViT transfer (B/32)",
+      "family": "vit_transfer",
+      "prediction_key": "vit_transfer",
+      "input_kind": "vit_b_32",
+      "representation": "RP pretrained features (768)",
+      "validation_accuracy": 0.8293925063659513,
+      "validation_macro_f1": 0.8149877264403118,
+      "configuration": {
+        "backbone": "vit_b_32",
+        "head_C": 0.1,
+        "head": "training-only StandardScaler + balanced multinomial logistic regression",
+        "backbone_recipe": {
+          "model": "vit_b_32",
+          "weights": "ViT_B_32_Weights.IMAGENET1K_V1",
+          "weights_url": "https://download.pytorch.org/models/vit_b_32-d86f8d99.pth",
+          "feature_width": 768,
+          "preprocessing": {
+            "resize": [
+              224,
+              224
+            ],
+            "interpolation": "bilinear",
+            "antialias": true,
+            "crop": null,
+            "augmentation": null,
+            "mean": [
+              0.485,
+              0.456,
+              0.406
+            ],
+            "std": [
+              0.229,
+              0.224,
+              0.225
+            ],
+            "adaptation": "Resize the entire RP to preserve both temporal boundaries; no ImageNet centre crop."
+          },
+          "torch_version": "2.15.0+cpu",
+          "torchvision_version": "0.29.2+cpu",
+          "device": "cpu",
+          "threads": 2,
+          "source": {
+            "cache_key": "78caa961ce11bca912e0b0d3cca9b5fa529785289625eeed421127af4052fd82",
+            "file_sha256": "fededa11b3a23e2fe2febe878a041412dee91469213f1c84f16b314016e34dac",
+            "rows": 13745
+          },
+          "split": "trainval",
+          "script_sha256": "102bf113a99c1b8bdb3eb83541a645e2362989f50b8a93c80d4b8ae303c27b94"
+        }
+      },
+      "model_path": "experiments/artifacts/image_vit_b_32_selected_head.joblib",
+      "model_sha256": "29ec0cd7144becfd066dae6ae61c90b5055af95c42ca4b47604d4ed6169ff0cb",
+      "validation_report": "experiments/artifacts/image_vit_b_32_validation.json",
+      "validation_report_sha256": "37ce84d6013c01d56e9a83db1ee8e251bdc8624babb34e40bb0ea5f4c893b897"
+    }
+  ],
+  "baseline_test_results_previously_seen": true,
+  "interpretation": "Exploratory fixed-ROI comparison; model families and some representations differ"
+}

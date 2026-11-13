@@ -2,7 +2,7 @@
   "status": "passed",
   "verification_date": "2026-11-13",
   "command": ".\\.venv\\Scripts\\python.exe checks\\verify_results.py",
-  "code_cells_with_sequential_outputs": 35,
+  "code_cells_with_sequential_outputs": 38,
   "notebook_errors": 0,
   "samples": {
     "train": 10996,
@@ -20,7 +20,7 @@
     "Matching full test supports",
     "Cache input keys and full file checksums"
   ],
-  "code_sha256": "26977d08fe58750d6b8bbf422c57a575a62aa53c0588ece771287af74ccb77c1",
+  "code_sha256": "77d9b57ec6ed87f5e8f768b28cbddc049fa57eb04cfb86ba212bd03f8a3644b6",
   "helper_sha256": {
     "phenology_data.py": "48940d6975cc542238925fcb0d94c5a16b990b8ddd2482025f00c1f3910cddbe",
     "knn_utils.py": "920528f82e5f4228f9d311ff84babd5b5aaaedc2a234d85f9791c51d6c9baa7f"
@@ -50,6 +50,139 @@
       "Extension comparison figure present"
     ]
   },
+  "optional_model_comparison": {
+    "status": "passed",
+    "test_pixels": 14105,
+    "models_checked": 10,
+    "original_baselines": 3,
+    "frozen_new_models": 7,
+    "checks": [
+      "Exact original test identities, labels and training/validation index order",
+      "Complete disjoint split and unique camera pixels",
+      "Every confusion matrix and metric independently recomputed from predictions",
+      "All six species and all 14,105 test pixels retained for every model",
+      "Balanced accuracy equals macro recall",
+      "Every new model agrees with the checksummed pre-evaluation selection record",
+      "Every frozen model appears in the final comparison"
+    ],
+    "protocol_file_verified": true,
+    "optional_artifact_lock_verified": true,
+    "dataset_file_checksum_matches": true,
+    "dataset_content_checksum_verified": true,
+    "large_model_artifacts_required": false,
+    "rows": [
+      {
+        "name": "Raw K-NN",
+        "prediction_key": "raw_knn",
+        "test_metrics": {
+          "Accuracy": 0.2653668911733428,
+          "Precision (macro)": 0.2089006688346429,
+          "Recall (macro)": 0.30475356264225967,
+          "F1-score (macro)": 0.22978751397523348
+        },
+        "balanced_accuracy": 0.30475356264225967
+      },
+      {
+        "name": "Recurrence K-NN",
+        "prediction_key": "rp_knn",
+        "test_metrics": {
+          "Accuracy": 0.23027295285359803,
+          "Precision (macro)": 0.20946749075400697,
+          "Recall (macro)": 0.24515024334491856,
+          "F1-score (macro)": 0.2227470802183604
+        },
+        "balanced_accuracy": 0.24515024334491856
+      },
+      {
+        "name": "Random forest",
+        "prediction_key": "random_forest",
+        "test_metrics": {
+          "Accuracy": 0.3412265154200638,
+          "Precision (macro)": 0.24718707237827067,
+          "Recall (macro)": 0.36394098735460667,
+          "F1-score (macro)": 0.26909720506486584
+        },
+        "balanced_accuracy": 0.36394098735460667
+      },
+      {
+        "name": "SVM (RBF)",
+        "prediction_key": "svm",
+        "test_metrics": {
+          "Accuracy": 0.319461183977313,
+          "Precision (macro)": 0.29330632792423317,
+          "Recall (macro)": 0.3336052716395006,
+          "F1-score (macro)": 0.2569942080028423
+        },
+        "balanced_accuracy": 0.3336052716395006
+      },
+      {
+        "name": "Multinomial logistic GLM",
+        "prediction_key": "glm",
+        "test_metrics": {
+          "Accuracy": 0.36391350584898974,
+          "Precision (macro)": 0.3170973763764971,
+          "Recall (macro)": 0.3890511835904207,
+          "F1-score (macro)": 0.314558405014509
+        },
+        "balanced_accuracy": 0.3890511835904207
+      },
+      {
+        "name": "XGBoost",
+        "prediction_key": "xgboost",
+        "test_metrics": {
+          "Accuracy": 0.3392414037575328,
+          "Precision (macro)": 0.21614251137979013,
+          "Recall (macro)": 0.35574817243729956,
+          "F1-score (macro)": 0.26070755408375595
+        },
+        "balanced_accuracy": 0.35574817243729956
+      },
+      {
+        "name": "Gaussian naive Bayes",
+        "prediction_key": "gaussian_nb",
+        "test_metrics": {
+          "Accuracy": 0.24721729883020205,
+          "Precision (macro)": 0.19396571885494718,
+          "Recall (macro)": 0.2533215517645248,
+          "F1-score (macro)": 0.20339903371977197
+        },
+        "balanced_accuracy": 0.2533215517645248
+      },
+      {
+        "name": "Bayesian network (TAN)",
+        "prediction_key": "tan",
+        "test_metrics": {
+          "Accuracy": 0.3412265154200638,
+          "Precision (macro)": 0.2700776431022516,
+          "Recall (macro)": 0.36782899330340696,
+          "F1-score (macro)": 0.2850444429699473
+        },
+        "balanced_accuracy": 0.36782899330340696
+      },
+      {
+        "name": "CNN transfer (MobileNet)",
+        "prediction_key": "cnn_transfer",
+        "test_metrics": {
+          "Accuracy": 0.2304856433888692,
+          "Precision (macro)": 0.21331681953623746,
+          "Recall (macro)": 0.2549386245729626,
+          "F1-score (macro)": 0.21957812212354044
+        },
+        "balanced_accuracy": 0.2549386245729626
+      },
+      {
+        "name": "ViT transfer (B/32)",
+        "prediction_key": "vit_transfer",
+        "test_metrics": {
+          "Accuracy": 0.25267635590216236,
+          "Precision (macro)": 0.2264542892780933,
+          "Recall (macro)": 0.2801145062762325,
+          "F1-score (macro)": 0.23788702176618556
+        },
+        "balanced_accuracy": 0.2801145062762325
+      }
+    ]
+  },
   "pending": [
     "Full rubric review",
     "Student review of explanations and reflection"
@@ -57,14 +190,17 @@
   "relocated_execution": {
     "date": "2026-11-13",
     "status": "passed",
-    "ordered_code_cells": 35,
-    "elapsed_seconds": 859.21,
-    "kernel_started_in": "extracted project/casework",
-    "prior_cache_or_results": false,
+    "ordered_code_cells": 38,
+    "elapsed_seconds": 708.45,
+    "kernel_started_in": "relocated project/casework",
+    "prior_core_cache_or_results": false,
+    "advanced_results_precomputed": true,
+    "advanced_training_enabled": false,
+    "large_model_artifacts_present": false,
     "baseline_predictions_and_metrics_identical": true,
     "platform": "Windows",
     "python_version": "3.11.15",
-    "scope": "Fresh kernel executed all cells in a separately relocated minimal project; original baseline outputs retained."
+    "scope": "Fresh core-only kernel ran every default notebook cell; core data/models recomputed, saved advanced comparison independently checked and displayed."
   },
   "clean_environment": {
     "status": "passed",
@@ -79,6 +215,36 @@
       "check_knn.py",
       "check_saved_data.py"
     ],
-    "scope": "Separate fresh environment installation and four independent checks; full notebook run used the project environment with the same pinned versions."
+    "scope": "Separate fresh environment installation and four independent checks; full notebook run used the project environment with the same pinned versions.",
+    "verification_date": "2026-11-13"
+  },
+  "optional_experiment_execution": {
+    "status": "completed",
+    "date": "2026-11-13",
+    "candidate_configurations": 29,
+    "frozen_new_models": 7,
+    "reported_models_including_original_baselines": 10,
+    "test_pixels_per_model": 14105,
+    "completed_utc": "2026-11-13T13:27:35.250037+00:00",
+    "python_version": "3.11.15",
+    "platform": "Windows",
+    "device": "CPU",
+    "versions": {
+      "xgboost": "3.2.0",
+      "torch": "2.15.0+cpu",
+      "torchvision": "0.29.2+cpu"
+    },
+    "optional_environment_packages_checked": 61,
+    "dependency_compatibility": "passed",
+    "preprocessing_and_selection": "Training-only fits; seven configurations frozen before new test evaluation",
+    "independent_metrics_and_pixel_membership": "passed",
+    "chart_export": "passed after using the noninteractive Agg backend; saved predictions were reused, with no model refit",
+    "scope": "Full additional-model training and prediction were executed separately; default notebook run displays and verifies their saved results."
+  },
+  "preservation": {
+    "baseline_commit": "3542acc",
+    "original_notebook_cells_exactly_preserved": 60,
+    "original_cell_outputs_and_metadata_preserved": true,
+    "original_predictions_reproduced": true
   }
 }
