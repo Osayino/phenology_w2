@@ -157,9 +157,11 @@ weaker outcomes; its 100% validation accuracy did not carry over to new regions.
 
 ## Final spatial and temporal experiments
 
-The notebook opens with a summary of these latest results and links to their
-full sections. It also shows where RGB values are divided by 255 and explains
-how that differs from RGBcc and recurrence-image scaling.
+The notebook opens with a reading guide to setup and Exercises 1-6, plus links
+to the latest results. After Exercise 6, "Extending the assignment" contains the
+full results overview and RGB scaling explanation, followed by Extensions A-D:
+classifiers on RGBcc, model families and RGB inputs, spatial context, and a
+temporal CNN. The required reflection follows the assignment's five topics.
 
 I tested whether neighboring colors help predictions in different image regions.
 The spatial comparison keeps the same balanced logistic GLM and adds local RGB
