@@ -243,8 +243,32 @@
   },
   "preservation": {
     "baseline_commit": "3542acc",
-    "original_notebook_cells_exactly_preserved": 60,
     "original_cell_outputs_and_metadata_preserved": true,
-    "original_predictions_reproduced": true
+    "original_predictions_reproduced": true,
+    "original_notebook_cells_exactly_preserved_before_prose_revision": 60,
+    "original_code_and_outputs_preserved": true
+  },
+  "prose_revision": {
+    "date": "2026-11-13",
+    "base_commit": "3020284c091de76a8aeef8c85b5aa03cc8878f23",
+    "scope": "First-person explanations, removal of reviewer-to-student instructions and prose em dashes, clarification of baselines and paper comparison",
+    "changed_markdown_cell_indices": [
+      3,
+      4,
+      6,
+      34,
+      35,
+      39,
+      43,
+      53,
+      54,
+      58,
+      59,
+      63
+    ],
+    "unchanged_code_cells_including_outputs_and_metadata": 38,
+    "assignment_question_cells_and_personal_notes_preserved": true,
+    "code_sha256_unchanged": true,
+    "model_rerun_required": false
   }
 }

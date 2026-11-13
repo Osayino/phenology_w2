@@ -44,8 +44,8 @@ Keep `casework` and `raw` together inside the project. Moving or extracting the 
 The remaining notebook exercises are implemented and a fresh Python kernel executed
 all 32 code cells in order without errors. Saved results
 were independently checked against predictions, sample identities and cache checksums.
-The reflection is a draft for student review. The full assessment rubric and exact
-submission requirements are still pending; completion is not a claim of a rubric score.
+The reflection discusses the measured results and their limitations. A full
+assessment-rubric review is still pending. A ZIP/project-folder submission is allowed.
 
 Exercise 2 now prepares individual-pixel RGBcc histories before creating the shared
 split. This moves the preparation originally described in Exercise 3 ahead of its
@@ -156,8 +156,9 @@ core-only kernel in a relocated project in **708 seconds**
 recurrence caches. The original predictions were reproduced exactly; the saved
 advanced comparison was independently checked and displayed without PyTorch,
 XGBoost, downloaded weights or fitted-model artifacts. The heavier training
-was completed separately in the optional environment. All 60 original notebook
-cells, including their outputs and metadata, remain intact in the main notebook.
+was completed separately in the optional environment. A later prose revision
+changed the explanations to first person and clarified the six-class baselines.
+All 38 code cells, their saved outputs and the measured results remain unchanged.
 
 Before the broader comparison was added, all 35 code cells completed in order in a fresh kernel in a relocated project,
 starting without results or recurrence caches. The run took 859 seconds (about
