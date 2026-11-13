@@ -1,0 +1,100 @@
+{
+  "run_date": "2026-11-13",
+  "seed": 42,
+  "feature_representation": "111 RGBcc features; same rows as the raw K-NN baseline",
+  "samples": {
+    "train": 10996,
+    "validation": 2749,
+    "test": 14105
+  },
+  "sklearn_version": "1.9.1",
+  "candidate_models": {
+    "Scaled RBF SVC (C=1)": "Pipeline(steps=[('standardscaler', StandardScaler()),\n                ('svc', SVC(C=1, class_weight='balanced'))])",
+    "Scaled RBF SVC (C=10)": "Pipeline(steps=[('standardscaler', StandardScaler()),\n                ('svc', SVC(C=10, class_weight='balanced'))])",
+    "Random forest": "RandomForestClassifier(class_weight='balanced', min_samples_leaf=2,\n                       n_estimators=150, n_jobs=1, random_state=42)"
+  },
+  "validation_candidates": [
+    {
+      "name": "Scaled RBF SVC (C=1)",
+      "accuracy": 0.9676245907602765,
+      "macro_f1": 0.9626018453503744,
+      "fit_and_validation_seconds": 5.3410719000094105
+    },
+    {
+      "name": "Scaled RBF SVC (C=10)",
+      "accuracy": 0.9759912695525645,
+      "macro_f1": 0.9707892198935492,
+      "fit_and_validation_seconds": 4.225384200020926
+    },
+    {
+      "name": "Random forest",
+      "accuracy": 0.9941797017097126,
+      "macro_f1": 0.994381373434423,
+      "fit_and_validation_seconds": 10.251061399991158
+    }
+  ],
+  "selection_rule": "highest validation accuracy; first declared candidate breaks a tie",
+  "selected_model": "Random forest",
+  "test_metrics": {
+    "Accuracy": 0.3412265154200638,
+    "Precision (macro)": 0.24718707237827067,
+    "Recall (macro)": 0.36394098735460667,
+    "F1-score (macro)": 0.26909720506486584
+  },
+  "confusion_matrix": [
+    [
+      1349,
+      1,
+      37,
+      70,
+      0,
+      2
+    ],
+    [
+      1491,
+      164,
+      370,
+      99,
+      28,
+      303
+    ],
+    [
+      0,
+      0,
+      695,
+      55,
+      0,
+      777
+    ],
+    [
+      525,
+      884,
+      41,
+      1,
+      568,
+      92
+    ],
+    [
+      82,
+      128,
+      62,
+      47,
+      68,
+      2614
+    ],
+    [
+      621,
+      122,
+      116,
+      109,
+      48,
+      2536
+    ]
+  ],
+  "accuracy_change_percentage_points": 7.585962424672105,
+  "limitations": [
+    "Validation pixels share training ROIs",
+    "Baseline test outcomes were known before designing this exploratory extension",
+    "Confirmation on additional independent regions is needed"
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "status": "passed",
+  "verification_date": "2026-11-13",
+  "command": ".\\.venv\\Scripts\\python.exe checks\\verify_results.py",
+  "code_cells_with_sequential_outputs": 35,
+  "notebook_errors": 0,
+  "samples": {
+    "train": 10996,
+    "validation": 2749,
+    "test": 14105
+  },
+  "all_selected_pixels": 27850,
+  "checks": [
+    "Sequential saved execution counts",
+    "Feature/identity/label alignment",
+    "Complete disjoint shared split",
+    "Validation-only K selection",
+    "Predictions recomputed from saved training-neighbour indices",
+    "Metrics and confusion matrices independently recomputed",
+    "Matching full test supports",
+    "Cache input keys and full file checksums"
+  ],
+  "code_sha256": "26977d08fe58750d6b8bbf422c57a575a62aa53c0588ece771287af74ccb77c1",
+  "helper_sha256": {
+    "phenology_data.py": "48940d6975cc542238925fcb0d94c5a16b990b8ddd2482025f00c1f3910cddbe",
+    "knn_utils.py": "920528f82e5f4228f9d311ff84babd5b5aaaedc2a234d85f9791c51d6c9baa7f"
+  },
+  "recurrence_file_sha256": {
+    "rp_trainval": "fededa11b3a23e2fe2febe878a041412dee91469213f1c84f16b314016e34dac",
+    "rp_test": "ac36f87f9fdffbf255dc78117d4427bcaa415a1c4aab280c7f31f126ad7cf82e"
+  },
+  "numpy_version": "2.4.6",
+  "sklearn_version": "1.9.1",
+  "optional_extension": {
+    "status": "passed",
+    "selected_model": "Random forest",
+    "validation_accuracy": 0.9941797017097126,
+    "validation_macro_f1": 0.994381373434423,
+    "test_metrics": {
+      "Accuracy": 0.3412265154200638,
+      "Precision (macro)": 0.24718707237827067,
+      "Recall (macro)": 0.36394098735460667,
+      "F1-score (macro)": 0.26909720506486584
+    },
+    "accuracy_change_percentage_points": 7.585962424672105,
+    "checks": [
+      "Selection agrees with saved validation scores and declared candidate order",
+      "Same test identities, labels and train/validation indices as baseline",
+      "Test metrics, confusion matrix and accuracy change independently recomputed",
+      "Extension comparison figure present"
+    ]
+  },
+  "pending": [
+    "Full rubric review",
+    "Student review of explanations and reflection"
+  ],
+  "relocated_execution": {
+    "date": "2026-11-13",
+    "status": "passed",
+    "ordered_code_cells": 35,
+    "elapsed_seconds": 859.21,
+    "kernel_started_in": "extracted project/casework",
+    "prior_cache_or_results": false,
+    "baseline_predictions_and_metrics_identical": true,
+    "platform": "Windows",
+    "python_version": "3.11.15",
+    "scope": "Fresh kernel executed all cells in a separately relocated minimal project; original baseline outputs retained."
+  },
+  "clean_environment": {
+    "status": "passed",
+    "python_version": "3.11.15",
+    "platform": "Windows",
+    "pinned_packages_installed": 50,
+    "installation_source": "local package cache (offline)",
+    "dependency_compatibility": "passed",
+    "checks": [
+      "check_transformations.py",
+      "check_pixel_data.py",
+      "check_knn.py",
+      "check_saved_data.py"
+    ],
+    "scope": "Separate fresh environment installation and four independent checks; full notebook run used the project environment with the same pinned versions."
+  }
+}

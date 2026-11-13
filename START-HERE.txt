@@ -1,0 +1,43 @@
+PHENOLOGY WEEK 2 - OPENING AND RUNNING THE SUBMISSION
+
+1. Extract the ZIP completely, keeping its folder structure. Open the extracted
+   project folder in VS Code. The main notebook is casework/case_notebook.ipynb.
+
+2. Install Python 3.11, then open a terminal in the extracted project folder and
+   create a fresh environment:
+
+   python -m venv .venv
+
+   Install the pinned dependencies with the command for your operating system:
+
+   Windows:
+   .venv\Scripts\python.exe -m pip install -r requirements-lock.txt
+
+   macOS / Linux:
+   .venv/bin/python -m pip install -r requirements-lock.txt
+
+   Python 3.11 and these pinned dependencies were tested on Windows. The macOS
+   and Linux setup commands are provided for convenience; those systems have
+   not been tested. Internet access is needed to install dependencies. The
+   assignment data is included, so running the notebook needs no data download.
+
+3. Install the Python and Jupyter extensions in VS Code. Open the notebook and
+   select the newly created .venv Python environment as its kernel.
+
+4. Use Run All to execute the notebook from top to bottom. The configuration
+   cell finds the project when the kernel starts in the project root or its
+   casework folder. For another launch location, set PROJECT_DIR in that cell
+   to the extracted project folder. Check the printed image and mask paths.
+
+The submission includes the two required helpers, casework/phenology_data.py and
+casework/knn_utils.py, plus 37 noon JPEG images in raw/images/1 and all 22 ROI
+masks in raw/masks. Keep these files alongside the notebook.
+
+The recurrence-image cache is generated automatically and occupies about
+1.53 GiB. Allow at least 4 GB of free disk space for the project, cache and
+generated files. A full run may take around 20 minutes; timing depends on the
+computer and whether a usable cache already exists.
+
+The notebook opens with its saved results available for review. Running it again
+recomputes results and writes files under results/; saving the notebook also
+saves its new cell outputs. Read README.md for the project layout and details.

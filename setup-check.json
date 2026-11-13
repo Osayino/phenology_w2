@@ -1,0 +1,35 @@
+{
+  "python": "3.11.15",
+  "interpreter": "C:\\Study\\2026-27\\P2_AI\\phenology_w2\\.venv\\Scripts\\python.exe",
+  "project": "C:\\Study\\2026-27\\P2_AI\\phenology_w2",
+  "notebook": "casework/case_notebook.ipynb",
+  "verified": "Provided setup/data-loading/plotting code through cell index 15",
+  "image_shape": [
+    37,
+    960,
+    1280,
+    3
+  ],
+  "masks": 22,
+  "train_rois": 6,
+  "test_rois": 6,
+  "train_pixels": 13745,
+  "test_pixels": 14105,
+  "figures": 2,
+  "source_cells_unchanged": false,
+  "source_changes": "Section 4 configuration now uses the explicit permanent PROJECT_DIR and checks both dataset directories; exercise source is unchanged.",
+  "path_fix_verified": {
+    "date": "2026-11-07",
+    "working_directories_tested": [
+      "C:\\Study\\2026-27\\P2_AI\\phenology_w2",
+      "C:\\Study\\2026-27\\P2_AI\\phenology_w2\\casework",
+      "C:\\Users\\User\\Documents\\Codex\\2026-11-04\\t\\outputs\\phenology-vscode\\casework"
+    ],
+    "all_resolve_to_permanent_dataset": true,
+    "jpeg_files": 472,
+    "noon_images_decoded": 37,
+    "masks_decoded": 22,
+    "species_prefixes": 6
+  },
+  "exercise_todos": "Preserved; unfinished classification is not verified."
+}

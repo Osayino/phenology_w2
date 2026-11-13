@@ -1,0 +1,231 @@
+<div id="knn-without-jargon">
+  <h2>K-NN = K nearest neighbors</h2>
+  <div class="viz-row">
+    <span>Classifier</span><strong>the method that predicts a species</strong>
+  </div>
+
+  <section class="knn-block" aria-labelledby="knn-features-heading">
+    <h3 id="knn-features-heading">Features = measurements</h3>
+    <div class="viz-controls">
+      <label class="form-label" for="knn-day-one">Unknown pixel: green share on day 1 (%)
+        <input class="form-control tabular-nums" id="knn-day-one" type="number" min="0" max="100" step="1" value="50">
+      </label>
+      <label class="form-label" for="knn-day-last">Unknown pixel: green share on day 37 (%)
+        <input class="form-control tabular-nums" id="knn-day-last" type="number" min="0" max="100" step="1" value="50">
+      </label>
+    </div>
+  </section>
+
+  <div class="knn-block">
+    <div class="viz-row">
+      <label class="form-label" for="knn-k"><strong>K = <output id="knn-k-value" class="tabular-nums">3</output></strong></label>
+      <span id="knn-k-label">3 closest known pixels vote</span>
+    </div>
+    <input class="form-range" id="knn-k" type="range" min="1" max="9" step="2" value="3" aria-label="K: number of nearest known pixels that vote">
+  </div>
+
+  <section class="knn-block" aria-labelledby="knn-map-heading">
+    <h3 id="knn-map-heading">Feature space = a map of measurements</h3>
+    <div class="viz-row knn-legend" aria-label="Labels are known species">
+      <span>Label = species:</span>
+      <span class="knn-key"><svg width="18" height="18" aria-hidden="true"><circle cx="9" cy="9" r="6" fill="var(--viz-series-1)"></circle></svg>Species A</span>
+      <span class="knn-key"><svg width="18" height="18" aria-hidden="true"><rect x="3" y="3" width="12" height="12" fill="var(--viz-series-2)"></rect></svg>Species B</span>
+      <span class="knn-key"><svg width="18" height="18" aria-hidden="true"><path d="M9 1 L17 9 L9 17 L1 9 Z" fill="var(--background)" stroke="var(--foreground)" stroke-width="1.5"></path></svg>Unknown pixel</span>
+    </div>
+    <div id="knn-plot-container">
+      <svg id="knn-plot" role="img" aria-labelledby="knn-chart-title knn-chart-desc"></svg>
+    </div>
+    <div class="text-small">Lines connect voting neighbors. Distance = difference in measurements.</div>
+  </section>
+
+  <div class="knn-block knn-result" role="status" aria-live="polite" aria-atomic="true">
+    <div class="viz-row"><span>Prediction</span><strong id="knn-prediction">Species B</strong><span id="knn-vote-detail" class="tabular-nums">Species A: 1 vote · Species B: 2 votes</span></div>
+    <div class="knn-vote-bar" role="img" aria-label="Neighbor votes">
+      <div id="knn-vote-a"></div><div id="knn-vote-b"></div>
+    </div>
+  </div>
+
+  <div class="knn-block text-small">Illustration: 2 features, 2 invented species. Your notebook: 111 raw features per pixel, 6 species.</div>
+  <div class="text-small">K counts neighbors; it is not an accuracy score.</div>
+
+  <style>
+    #knn-without-jargon { color: var(--foreground); }
+    #knn-without-jargon .knn-block { margin-top: calc(var(--font-size-base) * 1); }
+    #knn-without-jargon h2 { margin-bottom: calc(var(--font-size-base) * .5); padding-right: 90px; }
+    #knn-without-jargon h3 { margin-bottom: calc(var(--font-size-base) * .5); }
+    #knn-without-jargon .knn-legend { margin-bottom: calc(var(--font-size-base) * .5); }
+    #knn-without-jargon .knn-key { display: inline-flex; align-items: center; gap: calc(var(--font-size-base) * .25); }
+    #knn-without-jargon #knn-plot-container { width: 100%; max-width: 500px; margin-inline: auto; }
+    #knn-without-jargon #knn-plot { display: block; width: 100%; overflow: visible; }
+    #knn-without-jargon #knn-plot text { fill: var(--foreground); font-size: 12px; font-weight: 400; }
+    #knn-without-jargon #knn-plot .domain { stroke: var(--border); }
+    #knn-without-jargon #knn-plot .tick line { stroke: var(--border); }
+    #knn-without-jargon .knn-vote-bar { display: flex; height: calc(var(--font-size-base) * .65); margin-top: calc(var(--font-size-base) * .5); background: var(--muted); }
+    #knn-without-jargon #knn-vote-a { background: var(--viz-series-1); }
+    #knn-without-jargon #knn-vote-b { background: var(--viz-series-2); }
+    @media (prefers-reduced-motion: no-preference) {
+      #knn-without-jargon #knn-vote-a, #knn-without-jargon #knn-vote-b { transition: width 180ms ease; }
+    }
+  </style>
+
+  <script>
+  (() => {
+    const root = document.getElementById('knn-without-jargon');
+    const element = id => root.querySelector('#' + id);
+    const plotContainer = element('knn-plot-container');
+    const svgElement = element('knn-plot');
+    const inputX = element('knn-day-one');
+    const inputY = element('knn-day-last');
+    const inputK = element('knn-k');
+    const known = [
+      { id: 'A1', x: 60, y: 50, species: 'A' },
+      { id: 'B1', x: 50, y: 64, species: 'B' },
+      { id: 'B2', x: 33, y: 50, species: 'B' },
+      { id: 'A2', x: 50, y: 29, species: 'A' },
+      { id: 'A3', x: 71, y: 62, species: 'A' },
+      { id: 'B3', x: 26, y: 69, species: 'B' },
+      { id: 'A4', x: 80, y: 25, species: 'A' },
+      { id: 'B4', x: 12, y: 82, species: 'B' },
+      { id: 'A5', x: 91, y: 89, species: 'A' }
+    ];
+    const state = { k: 3, x: 50, y: 50 };
+    let previousPosition = null;
+    const clamp = n => Math.max(0, Math.min(100, Math.round(n)));
+    const color = species => species === 'A' ? 'var(--viz-series-1)' : 'var(--viz-series-2)';
+
+    function applySaved(saved) {
+      const value = saved && (saved.modelContent || saved);
+      if (!value || typeof value !== 'object') return;
+      if ([1, 3, 5, 7, 9].includes(value.k)) state.k = value.k;
+      if (Number.isFinite(value.x)) state.x = clamp(value.x);
+      if (Number.isFinite(value.y)) state.y = clamp(value.y);
+    }
+
+    function persist() {
+      if (!window.openai || !window.openai.setWidgetState) return;
+      window.openai.setWidgetState({ modelContent: { k: state.k, x: state.x, y: state.y }, privateContent: null }).catch(() => {});
+    }
+
+    function vote() {
+      const nearest = known.map(point => ({ ...point, distance: Math.hypot(point.x - state.x, point.y - state.y) }))
+        .sort((a, b) => a.distance - b.distance || a.id.localeCompare(b.id))
+        .slice(0, state.k);
+      const a = nearest.filter(point => point.species === 'A').length;
+      return { nearest, a, b: state.k - a, prediction: a > state.k - a ? 'A' : 'B' };
+    }
+
+    function update() {
+      const result = vote();
+      inputX.value = state.x;
+      inputY.value = state.y;
+      inputK.value = state.k;
+      inputK.setAttribute('aria-valuetext', state.k + ' nearest known pixels vote');
+      element('knn-k-value').textContent = state.k;
+      element('knn-k-label').textContent = state.k + (state.k === 1 ? ' closest known pixel votes' : ' closest known pixels vote');
+      element('knn-prediction').textContent = 'Species ' + result.prediction;
+      element('knn-vote-detail').textContent = 'Species A: ' + result.a + (result.a === 1 ? ' vote' : ' votes') + ' · Species B: ' + result.b + (result.b === 1 ? ' vote' : ' votes');
+      element('knn-vote-a').style.width = (100 * result.a / state.k) + '%';
+      element('knn-vote-b').style.width = (100 * result.b / state.k) + '%';
+      root.querySelector('.knn-vote-bar').setAttribute('aria-label', result.a + ' votes for species A and ' + result.b + ' votes for species B');
+      draw(result);
+    }
+
+    function draw(result) {
+      const width = Math.max(260, Math.round(plotContainer.getBoundingClientRect().width));
+      const margin = { left: 70, right: 24, top: 24, bottom: 65 };
+      const side = width - margin.left - margin.right;
+      const height = margin.top + side + margin.bottom;
+      const observations = [...known.flatMap(point => [point.x, point.y]), state.x, state.y, 0, 100];
+      const domain = [Math.min(...observations), Math.max(...observations)];
+      const padding = (domain[1] - domain[0]) * .03;
+      const low = domain[0] - padding;
+      const span = domain[1] - domain[0] + 2 * padding;
+      const x = value => margin.left + (value - low) / span * side;
+      const y = value => height - margin.bottom - (value - low) / span * side;
+      svgElement.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+      svgElement.setAttribute('height', height);
+      svgElement.replaceChildren();
+      function mark(tag, attributes, text, parent = svgElement) {
+        const node = document.createElementNS('http://www.w3.org/2000/svg', tag);
+        Object.entries(attributes || {}).forEach(([name, value]) => node.setAttribute(name, value));
+        if (text !== undefined) node.textContent = text;
+        parent.appendChild(node);
+        return node;
+      }
+      mark('title', { id: 'knn-chart-title' }, 'K-nearest-neighbor classification in a two-feature space');
+      mark('desc', { id: 'knn-chart-desc' }, 'Each known point is one pixel with a species label. Circles are species A, squares are species B. The diamond is an unknown pixel. Its horizontal and vertical coordinates are its green share on days 1 and 37. Lines connect its ' + state.k + ' nearest neighbors. Their majority predicts species ' + result.prediction + '.');
+      mark('rect', { 'data-chart-frame': '', x: margin.left, y: margin.top, width: side, height: side, fill: 'none', stroke: 'var(--border)', 'stroke-width': 1 });
+      const ticks = width <= 360 ? [0, 50, 100] : [0, 25, 50, 75, 100];
+      ticks.forEach(tick => {
+        mark('line', { x1: x(tick), x2: x(tick), y1: margin.top, y2: height - margin.bottom, stroke: 'var(--border)', 'stroke-width': 1 });
+        mark('line', { x1: margin.left, x2: width - margin.right, y1: y(tick), y2: y(tick), stroke: 'var(--border)', 'stroke-width': 1 });
+        mark('text', { x: x(tick), y: height - margin.bottom + 20, 'text-anchor': 'middle' }, tick);
+        mark('text', { x: margin.left - 9, y: y(tick) + 4, 'text-anchor': 'end' }, tick);
+      });
+      const xTitle = mark('text', { class: 'axis-title', 'data-axis': 'x', x: margin.left + side / 2, y: height - 25, 'text-anchor': 'middle' });
+      mark('tspan', { x: margin.left + side / 2 }, 'Feature 1: day 1', xTitle);
+      mark('tspan', { x: margin.left + side / 2, dy: '1.25em' }, 'Green share (%)', xTitle);
+      const yTitle = mark('text', { class: 'axis-title', 'data-axis': 'y', transform: 'translate(15,' + (margin.top + side / 2) + ') rotate(-90)', 'text-anchor': 'middle' });
+      mark('tspan', { x: 0 }, 'Feature 2: day 37', yTitle);
+      mark('tspan', { x: 0, dy: '1.25em' }, 'Green share (%)', yTitle);
+
+      result.nearest.forEach(point => {
+        mark('line', { 'data-neighbor': point.id, x1: x(state.x), y1: y(state.y), x2: x(point.x), y2: y(point.y), stroke: 'var(--foreground)', 'stroke-opacity': .38, 'stroke-width': 1.2 });
+      });
+      const active = new Set(result.nearest.map(point => point.id));
+      known.forEach(point => {
+        const group = mark('g', { 'data-known-pixel': point.id, 'data-tooltip': 'Known pixel ' + point.id + ' · species ' + point.species + ' · day 1: ' + point.x + '% · day 37: ' + point.y + '%' + (active.has(point.id) ? ' · votes' : '') });
+        const size = active.has(point.id) ? 6.4 : 5.3;
+        const attributes = { fill: color(point.species), opacity: active.has(point.id) ? 1 : .38 };
+        if (point.species === 'A') mark('circle', { ...attributes, cx: x(point.x), cy: y(point.y), r: size }, undefined, group);
+        else mark('rect', { ...attributes, x: x(point.x) - size, y: y(point.y) - size, width: size * 2, height: size * 2 }, undefined, group);
+        mark('circle', { 'data-chart-hit': '', cx: x(point.x), cy: y(point.y), r: 16, fill: 'transparent' }, undefined, group);
+      });
+      result.nearest.forEach((point, index) => {
+        const node = mark('text', { x: x(point.x) + 10, y: y(point.y) - 9 }, String(index + 1));
+        const box = node.getBBox();
+        if (box.x + box.width > width - margin.right - 4) node.setAttribute('x', x(point.x) - box.width - 10);
+        if (box.y < margin.top + 4) node.setAttribute('y', y(point.y) + box.height + 9);
+      });
+      const unknown = mark('g', { 'data-unknown-pixel': '', transform: 'translate(' + x(state.x) + ',' + y(state.y) + ')' });
+      mark('path', { d: 'M0 -11 L11 0 L0 11 L-11 0 Z', fill: 'var(--background)', stroke: 'var(--foreground)', 'stroke-width': 1.7 }, undefined, unknown);
+      mark('text', { 'text-anchor': 'middle', dy: '.35em' }, '?', unknown);
+      if (previousPosition && (previousPosition.x !== state.x || previousPosition.y !== state.y) && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        unknown.animate([
+          { transform: 'translate(' + x(previousPosition.x) + 'px,' + y(previousPosition.y) + 'px)' },
+          { transform: 'translate(' + x(state.x) + 'px,' + y(state.y) + 'px)' }
+        ], { duration: 180, easing: 'ease-out' });
+      }
+      previousPosition = { x: state.x, y: state.y };
+      mark('text', { x: margin.left, y: 13 }, '1 = closest neighbor');
+
+      svgElement.onclick = event => {
+        const pointer = svgElement.createSVGPoint();
+        pointer.x = event.clientX;
+        pointer.y = event.clientY;
+        const { x: px, y: py } = pointer.matrixTransform(svgElement.getScreenCTM().inverse());
+        if (px < margin.left || px > width - margin.right || py < margin.top || py > height - margin.bottom) return;
+        state.x = clamp(low + (px - margin.left) / side * span);
+        state.y = clamp(low + (height - margin.bottom - py) / side * span);
+        update();
+        persist();
+      };
+      const bounds = [...svgElement.querySelectorAll('text')].map(node => ({ node, box: node.getBBox() }));
+      root.dataset.labelsChecked = String(bounds.length);
+    }
+
+    inputK.addEventListener('input', () => { state.k = Number(inputK.value); update(); persist(); });
+    inputX.addEventListener('change', () => { state.x = Number.isFinite(inputX.valueAsNumber) ? clamp(inputX.valueAsNumber) : state.x; update(); persist(); });
+    inputY.addEventListener('change', () => { state.y = Number.isFinite(inputY.valueAsNumber) ? clamp(inputY.valueAsNumber) : state.y; update(); persist(); });
+    window.addEventListener('openai:set_globals', event => {
+      if (event.detail && event.detail.globals && event.detail.globals.widgetState) {
+        applySaved(event.detail.globals.widgetState);
+        update();
+      }
+    });
+    applySaved(window.openai && window.openai.widgetState);
+    new ResizeObserver(() => draw(vote())).observe(plotContainer);
+    update();
+  })();
+  </script>
+</div>
