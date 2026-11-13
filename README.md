@@ -1,8 +1,5 @@
 # Phenology — week 2
 
-Course: AIN30306, Artificial Intelligence in Science and Engineering.  
-Instructor: Ricardo da Silva Torres.
-
 Working project: `C:\Study\2026-27\P2_AI\phenology_w2`.
 
 The assignment compares K-nearest-neighbour classification of plant species using pixel colour time series and recurrence plot images.
